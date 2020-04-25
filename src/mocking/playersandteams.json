@@ -1,0 +1,21 @@
+{
+  "event": {
+    "ID": "9POsp3Krc2gCcZ3b",
+    "name": "Carlsberg summer cup 2020",
+    "teams": [
+      {
+        "ID": "jpBePJQSgJJv7vFT",
+        "name": "Lag #1",
+        "type": "9er",
+        "nbTotalPlayers": 11,
+        "players": [
+          {
+            "firstname": "Tom",
+            "group": "G2008",
+            "positions": ["vingback", "keeper"]
+          }
+        ]
+      }
+    ]
+  }
+}

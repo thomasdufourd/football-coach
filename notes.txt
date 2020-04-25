@@ -1,0 +1,59 @@
+Page 1: lineup
+
+Advanced lists
+https://www.npmjs.com/package/react-trello ???
+https://react-beautiful-dnd.netlify.app/?path=/story/complex-vertical-list--grouped
+
+Page 2: tactic schema
+#0 Use a canvas to put the SVGs all together (ref Path2D in https://blog.koenvangilst.nl/react-hooks-with-canvas/ )
+#1 Create a svg that will be the background for other svg components --> pitch
+#2 Position the player svg (a react component) where coordinates are passed as properties
+#3 Coordinates of player elements depend on:
+ - tactical schema: 1-2-2-1-2-1 for example
+ - number of players
+#4 Drag and drop vs select player -> select position
+ -> choose a player: as a player is selected, the player is marked as selected and the available positions are also "higlighted"
+ -> choose a position: name of player appears under position, player icon on the right is marked as non-available
+ -> double click on position: remove player
+
+
+SVG
+https://codesandbox.io/s/github/konvajs/site/tree/master/main-demo?from-embed
+
+--- Solution to manage the players on the pitch ----
+ * visualize: pitch + 9 players at 9 different positions (the positions will be related to the tactical schema)
+ * on click on a player, som visual attribute changes to notify the player is selected
+ * the player will have a text after a player is chosen on the righ side of the screen
+
+ -> we'll have to generate pitch + players (with attributes) after each change/click
+ -> we'll use an array of players where we will apply .map() => return "<circle> or any other complex <svg>"
+
+
+
+
+--- tech
+Custom canvas shape: https://konvajs.org/docs/react/Custom_Shape.html
+
+Drag and drop canvas: https://codesandbox.io/s/github/konvajs/site/tree/master/main-demo?from-embed
+
+=> how to transition / animate between tactical schemas?
+maybe -> https://blog.koenvangilst.nl/react-hooks-with-canvas/
+
+http://www.petecorey.com/blog/2019/08/19/animating-a-canvas-with-react-hooks/
+
+-- SVG
+https://github.com/entcheva/constellation-playground
+https://medium.com/@ericschwartz7/using-react-with-svg-57958f16e68a
+
+
+--- other stuffs ----
+
+PitchSvg
+https://tactical-board.com/uk/big-football-vertical
+
+
+Insp
+https://kinexon.com/solutions/football
+
+Visual
+https://www.dcmetropro.com/

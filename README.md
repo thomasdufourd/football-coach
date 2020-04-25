@@ -1,4 +1,29 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Lille Tøyen Fotballklubb coach-assistant applikasjon
+
+## Model
+
+### Groups
+Group of players G2008
+
+### Events
+ - training session
+ - cup
+ - championship
+ 
+## Features
+
+### Backlog
+ * uthenting av spillerliste fra AirTable
+ * lagre team oppsett i Airtable 
+ * Forside med: opprette teams (ifm en kup, seriespill, trening), liste av teams (kup, serie, trening)
+ * Trening modus: lagre oppmøte, generere grupper eller teams ift oppmøte
+ * FB innlogging
+ * Deling av laggopsett i form av read-only teams (auto-generert link)
+ * styling (logo, farger)
+ * bane view med posisjoner og spiller navn
+  
+  
+---
 
 ## Available Scripts
 
