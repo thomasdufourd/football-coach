@@ -38,6 +38,7 @@ export enum PositionLine {
     KEEPER = 'Goalkeeper',
     DEFENDER = 'Defender',
     MIDFIELDER = 'Midfielder',
+    DEFENSIVE_MIDFIELDER = 'Defensive Midfielder',
     FORWARD = 'Forward'
 }
 
@@ -51,6 +52,8 @@ export const LEFT_BACK:PositionOnField =
     {name: 'Left back', positionLine: PositionLine.DEFENDER, positionAxis: PositionAxis.LEFT};
 export const RIGHT_BACK:PositionOnField =
     {name: 'Right back', positionLine: PositionLine.DEFENDER, positionAxis: PositionAxis.RIGHT};
+export const DEFENSIVE_MIDFIELD:PositionOnField =
+    {name: 'Defensive Midfield', positionLine: PositionLine.DEFENSIVE_MIDFIELDER, positionAxis: PositionAxis.CENTER};
 export const LEFT_MIDFIELD:PositionOnField =
     {name: 'Left-midfield', positionLine: PositionLine.MIDFIELDER, positionAxis: PositionAxis.CENTER_LEFT};
 export const CENTRAL_MIDFIELD:PositionOnField =
@@ -85,14 +88,44 @@ export enum TacticalSchemaTypeName {
     _11er = '11er'
 }
 
+export const __7er: TacticalSchemaType = {
+    name: TacticalSchemaTypeName._7er, nbOfPlayers: 7
+};
+
+export const __9er: TacticalSchemaType = {
+    name: TacticalSchemaTypeName._9er, nbOfPlayers: 7
+};
+
+export const __2_3_1: TacticalSchema = {
+    name: '2_3_1',
+    type: {name: TacticalSchemaTypeName._7er, nbOfPlayers: 7},
+    positionsOnField: [
+        GOAL_KEEPER,
+        CENTRE_BACK_LEFT, CENTRE_BACK_RIGHT,
+        LEFT_MIDFIELD, CENTRAL_MIDFIELD, RIGHT_MIDFIELD,
+        STRIKER
+    ]
+};
+
 export const __4_3_1: TacticalSchema = {
     name: '4_3_1',
     type: {name: TacticalSchemaTypeName._9er, nbOfPlayers: 9},
     positionsOnField: [
         GOAL_KEEPER,
         LEFT_BACK, CENTRE_BACK_LEFT, CENTRE_BACK_RIGHT, RIGHT_BACK,
-        LEFT_MIDFIELD, CENTRAL_MIDFIELD, RIGHT_BACK,
+        LEFT_MIDFIELD, CENTRAL_MIDFIELD, RIGHT_MIDFIELD,
         STRIKER
+    ]
+};
+
+export const __3_3_2: TacticalSchema = {
+    name: '3_3_2',
+    type: {name: TacticalSchemaTypeName._9er, nbOfPlayers: 9},
+    positionsOnField: [
+        GOAL_KEEPER,
+        LEFT_BACK, CENTRE_BACK_LEFT, CENTRE_BACK_RIGHT, RIGHT_BACK,
+        DEFENSIVE_MIDFIELD,
+        LEFT_MIDFIELD, CENTRAL_MIDFIELD, RIGHT_MIDFIELD
     ]
 };
 
@@ -102,12 +135,13 @@ export const __4_2_2: TacticalSchema = {
     positionsOnField: [
         GOAL_KEEPER,
         LEFT_BACK, CENTRE_BACK_LEFT, CENTRE_BACK_RIGHT, RIGHT_BACK,
-        LEFT_MIDFIELD, RIGHT_BACK,
+        LEFT_MIDFIELD, RIGHT_MIDFIELD,
         LEFT_WING, RIGHT_WING
     ]
 };
 
 export interface Lineup {
+    team: Team,
     schema: TacticalSchema,
     starting: PlayerOnField[]
     substitutes: string[]
@@ -126,8 +160,24 @@ export interface Player {
 
 export interface Group {
     name: string;
-    year: Number;
+    year: number;
 }
 
+export interface Team {
+    order: number;
+    name: string;
+    tacticalSchemaType: TacticalSchemaType;
+    players: Player[];
+    group: Group;
+}
 
+export const emptyTeam: Team = {
+    order: 0, name: 'noteam', group: {name: 'nogroup', year:1900}, players: [], tacticalSchemaType: __9er
+};
 
+export const emptyLineup: Lineup = {
+    team: emptyTeam,
+    schema: __4_3_1,
+    starting: [],
+    substitutes: []
+};

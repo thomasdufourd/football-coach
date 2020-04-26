@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Button, Col, Container, Row} from "react-bootstrap";
+import {Breadcrumb, Button, Col, Container, Row} from "react-bootstrap";
 
 interface Props {
     group: string;
@@ -8,10 +8,15 @@ interface Props {
 const Teams: React.FunctionComponent<Props> = (props) => {
     return (
         <Container>
+            <Breadcrumb>
+                <Breadcrumb.Item href="../">Home</Breadcrumb.Item>
+                <Breadcrumb.Item active>Teams</Breadcrumb.Item>
+            </Breadcrumb>
 
             <Row>
                 <Col>
-                    <h1>Teams {props.group}</h1>
+                    <h1>Season 2020</h1>
+                    <h2>{props.group}</h2>
                 </Col>
             </Row>
             <Row>

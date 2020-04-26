@@ -9,12 +9,12 @@ import LineupBoard from './lineup/LineupBoard';
 import {Col, Container, Row} from "react-bootstrap";
 import PitchSvg from "./lineup/PitchSvg";
 import {
-    __4_3_1,
+    __4_3_1, __9er,
     CENTRAL_MIDFIELD,
     CENTRE_BACK_LEFT,
-    CENTRE_BACK_RIGHT,
+    CENTRE_BACK_RIGHT, emptyLineup,
     GOAL_KEEPER, LEFT_BACK, LEFT_MIDFIELD,
-    Lineup, RIGHT_BACK, RIGHT_MIDFIELD, STRIKER
+    Lineup, RIGHT_BACK, RIGHT_MIDFIELD, STRIKER, Team
 } from "./domain/PlayerUtils";
 
 export const PATH_FRONTPAGE = '/';
@@ -31,11 +31,7 @@ const App: FunctionComponent = () => {
 };
 
 const AppContent: FunctionComponent = () => {
-    const emptyLineup: Lineup = {
-        schema: __4_3_1,
-        starting: [],
-        substitutes: []
-    };
+
     let innhold = (
         <>
             <Route path={PATH_FRONTPAGE} exact={true}>
