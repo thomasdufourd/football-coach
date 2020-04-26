@@ -1,6 +1,6 @@
 import * as React from 'react';
 import PitchSvg from "./PitchSvg";
-import {Button, Col, Container, Dropdown, Row} from "react-bootstrap";
+import {Button, Col, Container, Dropdown, ListGroup, Row} from "react-bootstrap";
 import PlayerSvg from "./PlayerSvg";
 import {
     __4_3_1, CENTRAL_MIDFIELD,
@@ -16,8 +16,26 @@ interface Props {
     group: string;
 }
 
+interface TeamDropdown {
+    nb: number;
+    name: string;
+    type: string;
+}
+
+const teamDropdown: TeamDropdown[] = [
+    {nb: 0, name: 'Lag #1', type: '9-er'},
+    {nb: 1, name: 'Lag #2', type: '9-er'},
+    {nb: 2, name: 'Lag #3', type: '7-er'},
+];
+
 const LineupBoard: React.FunctionComponent<Props> = (props) => {
-    const [locations, setLocations] = React.useState([])
+
+    /*
+    const [chosenChoiceNumber, setChosenChoiceNumber] = React.useState([]);
+
+    const handleChoiceOfTeamChange = (teamNb) => {
+        setChosenChoiceNumber(teamNb)
+    };*/
 
     const lineupG2008Lag1: Lineup = {
         schema: __4_3_1,
@@ -45,24 +63,29 @@ const LineupBoard: React.FunctionComponent<Props> = (props) => {
                         <h1>Season lineup {props.group}</h1>
                     </Col>
                     <Col>
-                        <Dropdown>
+                        <Dropdown onSelect={(e: string) => console.log("selected "+e)}>
                             <Dropdown.Toggle variant="success" id="dropdown-basic">
                                 Teams
                             </Dropdown.Toggle>
                             <Dropdown.Menu>
-                                <Dropdown.Item href="#/action-1">Lag #1 (9er)</Dropdown.Item>
-                                <Dropdown.Item href="#/action-2">Lag #2 (9er)</Dropdown.Item>
-                                <Dropdown.Item href="#/action-3">Lag #3 (7er)</Dropdown.Item>
+                                {
+                                    teamDropdown.map((item) => {
+                                    return(
+                                        <Dropdown.Item onSelect={() => console.log("selected itemNumber "+ item.nb)}>
+                                            {item.name} {item.type}
+                                        </Dropdown.Item>
+                                    )})
+                                }
                             </Dropdown.Menu>
                         </Dropdown>
                     </Col>
                 </Row>
                 <Row>
                     <Col>
-                        <h4>Lag #1</h4>
+                        <h2>Lag #1</h2>
                     </Col>
                     <Col>
-                        <h4>9-er</h4>
+                        <h2>9-er</h2>
                     </Col>
                 </Row>
                 <Row>
@@ -94,7 +117,7 @@ const LineupBoard: React.FunctionComponent<Props> = (props) => {
                 </Row>
                 <Row>
                     <Col>
-                        <h4>Tactical schema</h4>
+                        <h3>Tactical schema</h3>
                     </Col>
                 </Row>
                 <Row>
@@ -110,8 +133,36 @@ const LineupBoard: React.FunctionComponent<Props> = (props) => {
                         </Button>
                     </Col>
                     <Col>
-                        <Button variant="dark">
+                        <Button variant="dark" disabled={true} >
                             Reset substitution
+                        </Button>
+                    </Col>
+                </Row>
+            </Container>
+
+            <Container>
+                <Row>
+                    <Col>
+                        <h2>Available lineups for Lag#1</h2>
+                    </Col>
+                </Row>
+                <Row>
+                    <ListGroup defaultActiveKey="#link1">
+                        <ListGroup.Item action onClick={ () => {console.log("Clicked on list item #1")}}>
+                            Match start
+                        </ListGroup.Item>
+                        <ListGroup.Item action onClick={ () => {console.log("Clicked on list item #2")}}>
+                            2nd Half
+                        </ListGroup.Item>
+                        <ListGroup.Item action onClick={ () => {console.log("Clicked on list item #3")}}>
+                            Should we try 3-3-2 (WIP)
+                        </ListGroup.Item>
+                    </ListGroup>,
+                </Row>
+                <Row>
+                    <Col>
+                        <Button variant="dark">
+                            New lineup
                         </Button>
                     </Col>
                 </Row>
