@@ -1,6 +1,6 @@
 import * as React from 'react';
 import PitchSvg from "./PitchSvg";
-import {Button, Col, Container, Row} from "react-bootstrap";
+import {Button, Col, Container, Dropdown, Row} from "react-bootstrap";
 import PlayerSvg from "./PlayerSvg";
 import {
     __4_3_1, CENTRAL_MIDFIELD,
@@ -12,8 +12,11 @@ import {
     RIGHT_BACK, RIGHT_MIDFIELD, STRIKER
 } from "../domain/PlayerUtils";
 
+interface Props {
+    group: string;
+}
 
-const LineupBoard: React.FunctionComponent = () => {
+const LineupBoard: React.FunctionComponent<Props> = (props) => {
     const [locations, setLocations] = React.useState([])
 
     const lineupG2008Lag1: Lineup = {
@@ -39,15 +42,27 @@ const LineupBoard: React.FunctionComponent = () => {
             <Container>
                 <Row>
                     <Col>
-                        <h2>Lineup</h2>
+                        <h1>Season lineup {props.group}</h1>
+                    </Col>
+                    <Col>
+                        <Dropdown>
+                            <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                Teams
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                <Dropdown.Item href="#/action-1">Lag #1 (9er)</Dropdown.Item>
+                                <Dropdown.Item href="#/action-2">Lag #2 (9er)</Dropdown.Item>
+                                <Dropdown.Item href="#/action-3">Lag #3 (7er)</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
                     </Col>
                 </Row>
                 <Row>
                     <Col>
-                        <h4>G2008 Lag #1</h4>
+                        <h4>Lag #1</h4>
                     </Col>
                     <Col>
-                        <h4>Seriespill 2020</h4>
+                        <h4>9-er</h4>
                     </Col>
                 </Row>
                 <Row>
@@ -82,7 +97,6 @@ const LineupBoard: React.FunctionComponent = () => {
                         <h4>Tactical schema</h4>
                     </Col>
                 </Row>
-
                 <Row>
                     <Col>
                         <Button variant="dark">
