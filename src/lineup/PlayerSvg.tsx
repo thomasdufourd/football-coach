@@ -19,23 +19,22 @@ const PlayerSvg: React.FunctionComponent<Props> = props => {
             <desc>Simple representation of a player</desc>
 
             <circle cx="0" cy="0" r="10" transform={position}
-                    fill="grey" stroke="black" stroke-width="5"
+                    fill="grey" stroke="black" strokeWidth="5"
                     onClick={event => {
-                        console.log(`Event ${event} on ${props.name}`)
+                        console.log(`Event ${event.type} on ${props.name}`)
                     }}
             />
             <text x="0" y="25"
                   transform={position}
-                  text-anchor="middle"
+                  textAnchor="middle"
                   stroke="#fffffe"
-                  stroke-width="0px"
+                  strokeWidth="0px"
                   dy=".1em"
             >
                 {props.name}
             </text>
         </svg>
     );
-
-}
+};
 
 export default PlayerSvg;

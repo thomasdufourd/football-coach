@@ -14,6 +14,7 @@ import {
 
 
 const LineupBoard: React.FunctionComponent = () => {
+    const [locations, setLocations] = React.useState([])
 
     const lineupG2008Lag1: Lineup = {
         schema: __4_3_1,
@@ -62,10 +63,14 @@ const LineupBoard: React.FunctionComponent = () => {
                         {
                             lineupG2008Lag1.substitutes.map((substituteName) => {
                                 return (
-                                    <div className="scaling-svg-container">
-                                        <svg className="scaling-svg" viewBox="0 0 400 60">
-                                            <PlayerSvg xposition={50} yposition={20} name={substituteName}></PlayerSvg>
-                                        </svg>
+                                    <div className="scaling-svg-container" key={substituteName}>
+                                            <svg className="scaling-svg" viewBox="0 0 400 60">
+                                                <PlayerSvg
+                                                    xposition={50}
+                                                    yposition={20}
+                                                    name={substituteName}>
+                                                </PlayerSvg>
+                                            </svg>
                                     </div>
                                 );
                             })
@@ -88,6 +93,11 @@ const LineupBoard: React.FunctionComponent = () => {
                         </Button>
                         <Button variant="dark">
                             4-3-1
+                        </Button>
+                    </Col>
+                    <Col>
+                        <Button variant="dark">
+                            Reset substitution
                         </Button>
                     </Col>
                 </Row>
