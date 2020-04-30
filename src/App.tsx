@@ -8,14 +8,7 @@ import Teams from "./teams/Teams";
 import LineupBoard from './lineup/LineupBoard';
 import {Col, Container, Row} from "react-bootstrap";
 import PitchSvg from "./lineup/PitchSvg";
-import {
-    __4_3_1, __9er,
-    CENTRAL_MIDFIELD,
-    CENTRE_BACK_LEFT,
-    CENTRE_BACK_RIGHT, emptyLineup,
-    GOAL_KEEPER, LEFT_BACK, LEFT_MIDFIELD,
-    Lineup, RIGHT_BACK, RIGHT_MIDFIELD, STRIKER, Team
-} from "./domain/PlayerUtils";
+import { empty_tactical_schema } from "./domain/PlayerUtils";
 
 export const PATH_FRONTPAGE = '/';
 export const PATH_LINEUPS = '/lineups';
@@ -43,7 +36,7 @@ const AppContent: FunctionComponent = () => {
                         <Col sm={8}>
                             <div className="scaling-svg-container">
                                 <svg className="scaling-svg" viewBox="0 0 1000 585">
-                                    <PitchSvg lineup={emptyLineup}/>
+                                    <PitchSvg playersOnField={[]} schema={empty_tactical_schema}/>
                                 </svg>
                             </div>
                         </Col>

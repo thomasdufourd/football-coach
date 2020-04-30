@@ -1,15 +1,16 @@
 import * as React from 'react';
-import {Lineup} from "../domain/PlayerUtils";
+import {PlayerWithRole, TacticalSchema} from "../domain/PlayerUtils";
 import {mapToSvgPlayers} from "./LineupUtils";
 
 
 interface Props {
-    lineup: Lineup
+    playersOnField: PlayerWithRole[],
+    schema: TacticalSchema
 }
 
 const PitchSvg: React.FunctionComponent<Props> = (props: Props) => {
 
-    const players = mapToSvgPlayers(props.lineup);
+    const players = mapToSvgPlayers(props.playersOnField, props.schema);
 
     return (
         <svg id="svg_pitch" width="1000" height="585" viewBox="0 0 1000 585">
