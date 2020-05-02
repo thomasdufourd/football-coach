@@ -3,25 +3,25 @@ import PitchSvg from "./PitchSvg";
 import {Button, Col, Container, Dropdown, ListGroup, Row} from "react-bootstrap";
 import PlayerSvg from "./PlayerSvg";
 import {
-    __3_3_2, __3_3_2_til__4_3_1_conversion_table,
-    __4_3_1, __4_3_1_til__3_3_2_conversion_table,
+    __3_3_2,
+    __3_3_2_til__4_3_1_conversion_table,
+    __4_3_1,
+    __4_3_1_til__3_3_2_conversion_table,
     emptyLineup,
     emptyTacticalSchema,
     emptyTeam,
     Lineup,
-    Player, PlayerWithRole, Role, TacticalSchema,
+    PlayerWithRole,
+    Role,
+    TacticalSchema,
     Team
 } from "../domain/PlayerUtils";
 import {lineupG2008Lag1, lineupG2008Lag2, lineupG2008Lag3} from "../mocking/LineupMockdata"
+import {SubstitutionInfoPanel} from "../substitution/SubstitutionInfoPanel";
+import {SubstitutionProvider} from "../substitution/SubstitutionProvider";
 
 interface Props {
     group: string;
-}
-
-
-interface Substitution {
-    out: Player;
-    in: Player;
 }
 
 const empyPlayerOnFieldListAtStart: PlayerWithRole[] =  [];
@@ -71,9 +71,6 @@ const LineupBoard: React.FunctionComponent<Props> = (props) => {
     const [chosenLineup, setChosenLineup] = React.useState(emptyLineup); // TODO: dont need that
     const [startingPlayersList, setStartingPlayerList] = React.useState(empyPlayerOnFieldListAtStart);
     const [chosenSchema, setChosenSchema] = React.useState(emptyTacticalSchema);
-
-    const [substitution, setSubstitution] = React.useState();
-
 
     const availableLineupsForTheGroup: Lineup[] = [
         lineupG2008Lag1, lineupG2008Lag2, lineupG2008Lag3
@@ -129,31 +126,35 @@ const LineupBoard: React.FunctionComponent<Props> = (props) => {
                     </Col>
                 </Row>
                 <Row>
-                    <Col sm={8}>
-                        <div className="scaling-svg-container">
-                            <svg className="scaling-svg" viewBox="0 0 1000 585">
-                                <PitchSvg playersOnField={startingPlayersList} schema={chosenSchema}/>
-                            </svg>
-                        </div>
-                    </Col>
-                    <Col sm={4}>
-                        <h5>Substitutes</h5>
-                        {
-                            chosenLineup.substitutes.map((substituteName) => {
-                                return (
-                                    <div className="scaling-svg-container" key={substituteName}>
+                    <SubstitutionProvider>
+                        <Col sm={8}>
+                            <div className="scaling-svg-container">
+                                <svg className="scaling-svg" viewBox="0 0 1000 585">
+                                    <PitchSvg playersOnField={startingPlayersList} schema={chosenSchema}/>
+                                </svg>
+                            </div>
+                        </Col>
+                        <Col sm={4}>
+                            <h5>Substitutes</h5>
+                            {
+                                chosenLineup.substitutes.map((substituteName) => {
+                                    return (
+                                        <div className="scaling-svg-container" key={substituteName}>
                                             <svg className="scaling-svg" viewBox="0 0 400 60">
                                                 <PlayerSvg
                                                     xposition={50}
                                                     yposition={20}
-                                                    name={substituteName}>
+                                                    name={substituteName}
+                                                >
                                                 </PlayerSvg>
                                             </svg>
-                                    </div>
-                                );
-                            })
-                        }
-                    </Col>
+                                        </div>
+                                    );
+                                })
+                            }
+                            <SubstitutionInfoPanel/>
+                        </Col>
+                    </SubstitutionProvider>
                 </Row>
                 <Row>
                     <Col>

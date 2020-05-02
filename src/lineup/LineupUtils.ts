@@ -1,4 +1,4 @@
-import {getCoordinatesFromRole, Lineup, PlayerWithRole, PositionOnField, TacticalSchema} from "../domain/PlayerUtils";
+import {getCoordinatesFromRole, PlayerWithRole, TacticalSchema} from "../domain/PlayerUtils";
 
 export interface SvgDrawyablePlayer {
     name: string;

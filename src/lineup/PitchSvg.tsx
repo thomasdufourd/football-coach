@@ -11,6 +11,7 @@ interface Props {
 const PitchSvg: React.FunctionComponent<Props> = (props: Props) => {
 
     const players = mapToSvgPlayers(props.playersOnField, props.schema);
+    const [isSelected, setIsSelected] = React.useState(false);
 
     return (
         <svg id="svg_pitch" width="1000" height="585" viewBox="0 0 1000 585">
@@ -94,9 +95,10 @@ const PitchSvg: React.FunctionComponent<Props> = (props: Props) => {
                                 xmlns="http://www.w3.org/2000/svg" version="1.1">
                                 <desc>Simple representation of a player</desc>
                                 <circle cx="0" cy="0" r="10" transform={position}
-                                        fill="grey" stroke="black"
+                                        fill={isSelected? "red" : "grey"} stroke="black"
                                         strokeWidth="5"
                                         onClick={event => {
+                                            setIsSelected(!isSelected);
                                             console.log(message + " /" + player.name)
                                         }}
                                 />
