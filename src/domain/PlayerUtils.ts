@@ -201,9 +201,14 @@ export interface Player {
     positions: PositionOnField[];
 }
 
+export type Gender = 'girl' | 'boy' | undefined;
+
+
 export interface Group {
-    name: string;
-    year: number;
+    name: string,
+    yearOfBirth: number,
+    gender: Gender,
+    players: Player[]
 }
 
 export interface Team {
@@ -215,7 +220,7 @@ export interface Team {
 }
 
 export const emptyTeam: Team = {
-    order: 0, name: ' ', group: {name: 'nogroup', year:1900}, players: [], tacticalSchemaType: NO_TACTICAL_SCHEMA
+    order: 0, name: ' ', group: {name: 'nogroup', yearOfBirth:1900, players:[], gender: undefined}, players: [], tacticalSchemaType: NO_TACTICAL_SCHEMA
 };
 
 export const emptyLineup: Lineup = {

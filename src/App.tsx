@@ -9,6 +9,7 @@ import LineupBoard from './lineup/LineupBoard';
 import {Col, Container, Row} from "react-bootstrap";
 import PitchSvg from "./lineup/PitchSvg";
 import { empty_tactical_schema } from "./domain/PlayerUtils";
+import {SubstitutionProvider} from "./substitution/SubstitutionProvider";
 
 export const PATH_FRONTPAGE = '/';
 export const PATH_LINEUPS = '/lineups';
@@ -47,7 +48,9 @@ const AppContent: FunctionComponent = () => {
                 <Teams group="G2008"/>
             </Route>
             <Route path={PATH_LINEUPS} exact={true}>
+                <SubstitutionProvider>
                 <LineupBoard group="G2008"/>
+                    </SubstitutionProvider>
             </Route>
 
         </>

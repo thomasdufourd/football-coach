@@ -8,7 +8,7 @@ export const lineupG2008Lag1: Lineup = {
     team: {
         group: {
             name: "G2008",
-            year: 2008
+            yearOfBirth: 2008, gender: "boy", players: [] // TODO: populate with all players
         },
         name: "Lag #1",
         order: 1,
@@ -36,7 +36,7 @@ export const lineupG2008Lag2: Lineup = {
     team: {
         group: {
             name: "G2008",
-            year: 2008
+            yearOfBirth: 2008, gender: "boy", players: [] // TODO: populate with all players
         },
         name: "Lag #2",
         order: 2,
@@ -64,7 +64,7 @@ export const lineupG2008Lag3: Lineup = {
     team: {
         group: {
             name: "G2008",
-            year: 2008
+            yearOfBirth: 2008, gender: "boy", players: [] // TODO: populate with all players
         },
         name: "Lag #3",
         order: 3,

@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {useContext} from "react";
+import {useContext} from 'react';
 import {SubstitutionContext} from "../substitution/SubstitutionProvider";
-import {makeNewSubstitution} from "../substitution/SubstitutionUtils";
+import {getNewSubstitutionWithSelectedPlayer, isInSubstitution} from "../substitution/SubstitutionUtils";
 
 interface Props {
     name: string;
@@ -13,7 +13,6 @@ interface Props {
 const PlayerSvg: React.FunctionComponent<Props> = props => {
 
     const {getSubstitution, setSubstitution} = useContext(SubstitutionContext);
-    const [isSelected, setIsSelected] = React.useState(false);
 
     const {xposition, yposition} = props;
     let position: string = `translate(${xposition}  ${yposition})`;
@@ -25,10 +24,9 @@ const PlayerSvg: React.FunctionComponent<Props> = props => {
             <desc>Simple representation of a player</desc>
 
             <circle cx="0" cy="0" r="10" transform={position}
-                    fill={isSelected? "red" : "grey"} stroke="black" strokeWidth="5"
+                    fill={isInSubstitution(props.name, getSubstitution())? "red" : "grey"}
                     onClick={event => {
-                        setIsSelected(!isSelected);
-                        setSubstitution(makeNewSubstitution(props.name, getSubstitution()));
+                        setSubstitution(getNewSubstitutionWithSelectedPlayer(props.name, getSubstitution()));
                         console.log(`Event ${event.type} on ${props.name}`);
                     }}
             />

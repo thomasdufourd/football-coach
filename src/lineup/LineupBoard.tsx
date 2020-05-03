@@ -2,80 +2,35 @@ import * as React from 'react';
 import PitchSvg from "./PitchSvg";
 import {Button, Col, Container, Dropdown, ListGroup, Row} from "react-bootstrap";
 import PlayerSvg from "./PlayerSvg";
-import {
-    __3_3_2,
-    __3_3_2_til__4_3_1_conversion_table,
-    __4_3_1,
-    __4_3_1_til__3_3_2_conversion_table,
-    emptyLineup,
-    emptyTacticalSchema,
-    emptyTeam,
-    Lineup,
-    PlayerWithRole,
-    Role,
-    TacticalSchema,
-    Team
-} from "../domain/PlayerUtils";
+import {__3_3_2, __4_3_1, emptyLineup, emptyTacticalSchema, emptyTeam, Lineup, Team} from "../domain/PlayerUtils";
 import {lineupG2008Lag1, lineupG2008Lag2, lineupG2008Lag3} from "../mocking/LineupMockdata"
 import {SubstitutionInfoPanel} from "../substitution/SubstitutionInfoPanel";
-import {SubstitutionProvider} from "../substitution/SubstitutionProvider";
+import {SubstitutionContext} from "../substitution/SubstitutionProvider";
+import {emptySubstitution} from "../substitution/SubstitutionUtils";
+import {applySchema, emptyPlayerOnFieldListAtStart} from "./LineupUtils";
+import {Substitutes} from "./Substitutes";
+import {useEffect} from "react";
 
 interface Props {
     group: string;
 }
 
-const empyPlayerOnFieldListAtStart: PlayerWithRole[] =  [];
 
-function convertRole(role: Role, schemaOrigin: TacticalSchema, schemaTarget: TacticalSchema): Role {
-    switch (schemaOrigin) {
-        case __4_3_1:
-            if (schemaTarget === __3_3_2) {
-                // @ts-ignore
-                return __4_3_1_til__3_3_2_conversion_table.has(role) ?
-                    __4_3_1_til__3_3_2_conversion_table.get(role)
-                    : role;
-            } else {
-                return role;
-            }
-        case __3_3_2:
-            if (schemaTarget === __4_3_1) {
-                // @ts-ignore
-                return __3_3_2_til__4_3_1_conversion_table.has(role) ?
-                    __3_3_2_til__4_3_1_conversion_table.get(role)
-                    : role;
-            } else {
-                return role;
-            }
-        default:
-            return role;
-    }
-}
-
-const applySchema = (
-    startingPlayersList: PlayerWithRole[],
-    schemaOrigin: TacticalSchema,
-    schemaTarget: TacticalSchema): PlayerWithRole[]  => {
-    console.log(`[DEBUG] ----> applySchema has been called from schema ${schemaOrigin.name} to schema ${schemaTarget.name}`);
-    return startingPlayersList.map( (player) => {
-        let previousRole = player.role;
-        player.role = convertRole(player.role, schemaOrigin, schemaTarget);
-        console.log(`[DEBUG] ----> converted player ${player.playerName} 
-         with previous role ${previousRole} to role ${player.role}`);
-        return player;
-    });
-};
 
 const LineupBoard: React.FunctionComponent<Props> = (props) => {
 
     const [team, setTeam] = React.useState(emptyTeam);
-    const [chosenLineup, setChosenLineup] = React.useState(emptyLineup); // TODO: dont need that
-    const [startingPlayersList, setStartingPlayerList] = React.useState(empyPlayerOnFieldListAtStart);
+    const [chosenLineup, setChosenLineup] = React.useState(emptyLineup);
+    const [substitutes, setSubstitutes] = React.useState(emptyLineup.substitutes);
+    const [startingPlayersList, setStartingPlayersList] = React.useState(emptyPlayerOnFieldListAtStart);
     const [chosenSchema, setChosenSchema] = React.useState(emptyTacticalSchema);
+    const {setSubstitution} = React.useContext(SubstitutionContext);
 
     const availableLineupsForTheGroup: Lineup[] = [
         lineupG2008Lag1, lineupG2008Lag2, lineupG2008Lag3
     ];
 
+    // This should be the input ---> App ?
     const listOfAvailableTeams: Team[] = availableLineupsForTheGroup.map( (lineup: Lineup) => {
         return lineup.team
     });
@@ -105,10 +60,11 @@ const LineupBoard: React.FunctionComponent<Props> = (props) => {
                                             setTeam(team);
                                             const lineup = getLineup(team);
                                             setChosenLineup(lineup);
-                                            setStartingPlayerList(lineup.starting);
+                                            setStartingPlayersList(lineup.starting);
+                                            setSubstitutes(lineup.substitutes);
                                             setChosenSchema(lineup.schema);
-                                        }
-                                        }>
+                                            setSubstitution(emptySubstitution);
+                                        }}>
                                             {team.name} {team.tacticalSchemaType.name}
                                         </Dropdown.Item>
                                     )})
@@ -126,7 +82,6 @@ const LineupBoard: React.FunctionComponent<Props> = (props) => {
                     </Col>
                 </Row>
                 <Row>
-                    <SubstitutionProvider>
                         <Col sm={8}>
                             <div className="scaling-svg-container">
                                 <svg className="scaling-svg" viewBox="0 0 1000 585">
@@ -134,27 +89,17 @@ const LineupBoard: React.FunctionComponent<Props> = (props) => {
                                 </svg>
                             </div>
                         </Col>
-                        <Col sm={4}>
-                            <h5>Substitutes</h5>
-                            {
-                                chosenLineup.substitutes.map((substituteName) => {
-                                    return (
-                                        <div className="scaling-svg-container" key={substituteName}>
-                                            <svg className="scaling-svg" viewBox="0 0 400 60">
-                                                <PlayerSvg
-                                                    xposition={50}
-                                                    yposition={20}
-                                                    name={substituteName}
-                                                >
-                                                </PlayerSvg>
-                                            </svg>
-                                        </div>
-                                    );
-                                })
-                            }
-                            <SubstitutionInfoPanel/>
-                        </Col>
-                    </SubstitutionProvider>
+                    <Col sm={4}>
+                        <h5>Substitutes</h5>
+
+                        <Substitutes substitutes={substitutes}/>
+                        <SubstitutionInfoPanel
+                            startingPlayersList={startingPlayersList}
+                            setStartingPlayersList={setStartingPlayersList}
+                            substitutes={substitutes}
+                            setSubstitutes={setSubstitutes}
+                        />
+                    </Col>
                 </Row>
                 <Row>
                     <Col>
@@ -167,7 +112,7 @@ const LineupBoard: React.FunctionComponent<Props> = (props) => {
                             variant="dark"
                             disabled={chosenSchema === __4_3_1 || chosenSchema === emptyTacticalSchema}
                             onClick={() => {
-                                setStartingPlayerList(applySchema(startingPlayersList, chosenSchema, __4_3_1));
+                                setStartingPlayersList(applySchema(startingPlayersList, chosenSchema, __4_3_1));
                                 setChosenSchema(__4_3_1);
                             }}>
                             {__4_3_1.name}
@@ -176,19 +121,12 @@ const LineupBoard: React.FunctionComponent<Props> = (props) => {
                             variant="dark"
                             disabled={chosenSchema === __3_3_2 || chosenSchema === emptyTacticalSchema}
                             onClick={() => {
-                                setStartingPlayerList(applySchema(startingPlayersList, chosenSchema, __3_3_2));
+                                setStartingPlayersList(applySchema(startingPlayersList, chosenSchema, __3_3_2));
                                 setChosenSchema(__3_3_2);
                             }}>
                             {__3_3_2.name}
                         </Button>
                     </Col>
-                    {/*
-                    <Col>
-                        <Button variant="dark" disabled={true} >
-                            Reset substitution
-                        </Button>
-                    </Col>
-                    */}
                 </Row>
             </Container>
 

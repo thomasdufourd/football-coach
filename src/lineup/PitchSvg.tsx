@@ -1,6 +1,14 @@
 import * as React from 'react';
+import {useContext} from 'react';
 import {PlayerWithRole, TacticalSchema} from "../domain/PlayerUtils";
 import {mapToSvgPlayers} from "./LineupUtils";
+import {SubstitutionContext} from "../substitution/SubstitutionProvider";
+import {
+    emptySubstitution,
+    getNewSubstitutionWithSelectedPlayer,
+    isInSubstitution,
+    Substitution
+} from "../substitution/SubstitutionUtils";
 
 
 interface Props {
@@ -11,7 +19,7 @@ interface Props {
 const PitchSvg: React.FunctionComponent<Props> = (props: Props) => {
 
     const players = mapToSvgPlayers(props.playersOnField, props.schema);
-    const [isSelected, setIsSelected] = React.useState(false);
+    const {getSubstitution, setSubstitution} = useContext(SubstitutionContext);
 
     return (
         <svg id="svg_pitch" width="1000" height="585" viewBox="0 0 1000 585">
@@ -95,10 +103,11 @@ const PitchSvg: React.FunctionComponent<Props> = (props: Props) => {
                                 xmlns="http://www.w3.org/2000/svg" version="1.1">
                                 <desc>Simple representation of a player</desc>
                                 <circle cx="0" cy="0" r="10" transform={position}
-                                        fill={isSelected? "red" : "grey"} stroke="black"
+                                        fill={isInSubstitution(player.name, getSubstitution())? "red" : "grey"}
+                                        stroke="black"
                                         strokeWidth="5"
                                         onClick={event => {
-                                            setIsSelected(!isSelected);
+                                            setSubstitution(getNewSubstitutionWithSelectedPlayer(player.name, getSubstitution()));
                                             console.log(message + " /" + player.name)
                                         }}
                                 />
