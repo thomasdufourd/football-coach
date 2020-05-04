@@ -74,7 +74,7 @@ const LineupBoard: React.FunctionComponent<Props> = (props) => {
                 </Row>
                 <Row className="mt-1">
                     <Col className="col-sm-8">
-                        <h2>Team {team.name} </h2>
+                        <h2>Team {team === emptyTeam? '' : `"${team.name}"`}</h2>
                     </Col>
                     <Col>
                         <h2>{team.tacticalSchemaType.name} {team === emptyTeam? '' : `(${chosenSchema.name})`}</h2>
