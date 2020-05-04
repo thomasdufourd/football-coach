@@ -1,13 +1,15 @@
 import * as React from 'react';
+import './SubstitutionInfoPanel.scss';
 import {FunctionComponent, useContext} from 'react';
 import {SubstitutionContext} from "./SubstitutionProvider";
-import {Button} from "react-bootstrap";
+import {Button, Col} from "react-bootstrap";
 import {
     applySubstitutionToStartingPlayersListAndSubstitutes,
     emptySubstitution,
     isInSubstitutesList
 } from "./SubstitutionUtils";
-import {Lineup, PlayerWithRole} from "../domain/PlayerUtils";
+import {PlayerWithRole} from "../domain/PlayerUtils";
+import {Substitutes} from "../lineup/Substitutes";
 
 interface Props {
     startingPlayersList: PlayerWithRole[];
@@ -22,11 +24,11 @@ export const SubstitutionInfoPanel: FunctionComponent<Props> = ( props) => {
 
 
     return (
-        <>
-            <p>Comming substitution: in='{getSubstitution().in}' out='{getSubstitution().out}'
-                status='{getSubstitution().status}'
-            </p>
+        <div className={props.substitutes.length === 0 ? "invisible" : "visible"}>
+            <h5>Substitutes</h5>
+            <Substitutes substitutes={props.substitutes}/>
 
+            <div className="substitutioninfopanel__confirm-button">
             <Button
                 variant="dark"
                 disabled={getSubstitution().status !== "Ready" }
@@ -50,7 +52,8 @@ export const SubstitutionInfoPanel: FunctionComponent<Props> = ( props) => {
                 }}>
                 Confirm substitution
             </Button>
-        </>
+        </div>
+            </div>
 
     );
 };

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './LineupBoard.scss';
 import PitchSvg from "./PitchSvg";
 import {Button, Col, Container, Dropdown, ListGroup, Row} from "react-bootstrap";
 import {__3_3_2, __4_3_1, emptyLineup, emptyTacticalSchema, emptyTeam, Lineup, Team} from "../domain/PlayerUtils";
@@ -40,13 +41,13 @@ const LineupBoard: React.FunctionComponent<Props> = (props) => {
 
     return (
         <>
-            <Container>
-                <Row>
-                    <Col>
+            <Container className="container-fluid">
+                <Row className="mt-2">
+                    <Col className="small">
                         <h1>Season lineup {props.group}</h1>
                     </Col>
                     <Col>
-                        <Dropdown>
+                        <Dropdown className="float-right">
                             <Dropdown.Toggle variant="success" id="dropdown-basic">
                                 Teams
                             </Dropdown.Toggle>
@@ -71,15 +72,15 @@ const LineupBoard: React.FunctionComponent<Props> = (props) => {
                         </Dropdown>
                     </Col>
                 </Row>
-                <Row>
-                    <Col>
+                <Row className="mt-1">
+                    <Col className="col-sm-8">
                         <h2>Team {team.name} </h2>
                     </Col>
                     <Col>
-                        <h2>{team.tacticalSchemaType.name}</h2>
+                        <h2>{team.tacticalSchemaType.name} {team === emptyTeam? '' : `(${chosenSchema.name})`}</h2>
                     </Col>
                 </Row>
-                <Row>
+                <Row className="mt-1">
                         <Col sm={8}>
                             <div className="scaling-svg-container">
                                 <svg className="scaling-svg" viewBox="0 0 1000 585">
@@ -88,9 +89,6 @@ const LineupBoard: React.FunctionComponent<Props> = (props) => {
                             </div>
                         </Col>
                     <Col sm={4}>
-                        <h5>Substitutes</h5>
-
-                        <Substitutes substitutes={substitutes}/>
                         <SubstitutionInfoPanel
                             startingPlayersList={startingPlayersList}
                             setStartingPlayersList={setStartingPlayersList}
@@ -99,14 +97,14 @@ const LineupBoard: React.FunctionComponent<Props> = (props) => {
                         />
                     </Col>
                 </Row>
-                <Row>
+                <Row className="lineupboard__tactical-schema">
                     <Col>
                         <h3>Tactical schema</h3>
                     </Col>
                 </Row>
-                <Row>
+                <Row >
                     <Col>
-                        <Button
+                        <Button className="m-1"
                             variant="dark"
                             disabled={chosenSchema === __4_3_1 || chosenSchema === emptyTacticalSchema}
                             onClick={() => {
@@ -115,7 +113,7 @@ const LineupBoard: React.FunctionComponent<Props> = (props) => {
                             }}>
                             {__4_3_1.name}
                         </Button>
-                        <Button
+                        <Button className="m-1"
                             variant="dark"
                             disabled={chosenSchema === __3_3_2 || chosenSchema === emptyTacticalSchema}
                             onClick={() => {
@@ -131,33 +129,6 @@ const LineupBoard: React.FunctionComponent<Props> = (props) => {
             {
                 // TODO: create a component
             }
-            <Container>
-                <Row>
-                    <Col>
-                        <h2>Lineups for {team.name} {team.tacticalSchemaType.name}</h2>
-                    </Col>
-                </Row>
-                <Row>
-                    <ListGroup defaultActiveKey="#link1">
-                        <ListGroup.Item disabled={true} action onClick={ () => {console.log("Clicked on list item #1")}}>
-                            Match start (default)
-                        </ListGroup.Item>
-                        <ListGroup.Item action onClick={ () => {console.log("Clicked on list item #2")}}>
-                            2nd Half
-                        </ListGroup.Item>
-                        <ListGroup.Item action onClick={ () => {console.log("Clicked on list item #3")}}>
-                            Should we try 3-3-2 (WIP)
-                        </ListGroup.Item>
-                    </ListGroup>,
-                </Row>
-                <Row>
-                    <Col>
-                        <Button variant="dark">
-                            New lineup
-                        </Button>
-                    </Col>
-                </Row>
-            </Container>
         </>
     );
 };
