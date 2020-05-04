@@ -1,7 +1,6 @@
 import * as React from 'react';
 import PitchSvg from "./PitchSvg";
 import {Button, Col, Container, Dropdown, ListGroup, Row} from "react-bootstrap";
-import PlayerSvg from "./PlayerSvg";
 import {__3_3_2, __4_3_1, emptyLineup, emptyTacticalSchema, emptyTeam, Lineup, Team} from "../domain/PlayerUtils";
 import {lineupG2008Lag1, lineupG2008Lag2, lineupG2008Lag3} from "../mocking/LineupMockdata"
 import {SubstitutionInfoPanel} from "../substitution/SubstitutionInfoPanel";
@@ -9,7 +8,6 @@ import {SubstitutionContext} from "../substitution/SubstitutionProvider";
 import {emptySubstitution} from "../substitution/SubstitutionUtils";
 import {applySchema, emptyPlayerOnFieldListAtStart} from "./LineupUtils";
 import {Substitutes} from "./Substitutes";
-import {useEffect} from "react";
 
 interface Props {
     group: string;

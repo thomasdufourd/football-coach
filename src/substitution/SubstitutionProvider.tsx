@@ -19,13 +19,6 @@ export const SubstitutionProvider: FunctionComponent<Props> = ({children}: Props
 
     const [substitution, setSubstitution] = useState<Substitution>(emptySubstitution);
 
-    /*
-    useEffect(() => {
-        // Logic for changes in substitution ... this is where the side effect happens
-        console.log(`Substitution is : [${substitution.status}, ${substitution.in}], ${substitution.out}, changing it ;) `);
-        setSubstitution(substitution);
-    }, [substitution]);
-*/
     const updateSubstitution = (newSubstitution: Substitution) => {
         setSubstitution(newSubstitution);
     };

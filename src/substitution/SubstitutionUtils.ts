@@ -1,3 +1,5 @@
+import {PlayerWithRole} from "../domain/PlayerUtils";
+
 export type SubstitutionStatus = 'Empty' | 'In' | 'Ready'
 
 export interface Substitution {
@@ -36,33 +38,37 @@ export const getNewSubstitutionWithSelectedPlayer = (playerName: string, substit
     }
 };
 
-export const makeNewSubstitution = (playerName: string, substitution: Substitution): Substitution => {
-    console.log(`[DEBUG] substitution in='${substitution.in}' out='${substitution.out} status='${substitution.status}`);
-    switch (substitution.status) {
-        case 'Empty':
-            substitution = {
-                in: playerName,
-                out: '',
-                status: 'In'
-            };
-            break;
-        case 'In':
-            if (playerName !== substitution.in) {
-                substitution = {
-                    in: substitution.in,
-                    out: playerName,
-                    status: 'Ready'
-                };
-            } else {
-                substitution = emptySubstitution;
+export const applySubstitutionToStartingPlayersListAndSubstitutes =
+    (startingPlayersList: PlayerWithRole[], substitutes: string[], substitution: Substitution):
+        { startingPlayersList: PlayerWithRole[], substitutes: string[] } => {
+
+
+        // 1- both players are on pitch ---> TODO: swap (do nothing for the moment)
+        // 2- one is one the pitch and the other is substitutes
+        startingPlayersList.forEach(p => {
+                if (p.playerName === substitution.out) {
+                    p.playerName = substitution.in;
+                }
             }
-            break;
-        case 'Ready':
-            substitution = emptySubstitution;
-            break;
-        default:
-            break;
-    }
-    console.log(`[DEBUG][addToSubstitution()] --> substitution in='${substitution.in}' out='${substitution.out} status='${substitution.status}`);
-    return substitution;
+        );
+        if (substitutes.indexOf(substitution.in) !== -1) {
+            substitutes[substitutes.indexOf(substitution.in)] = substitution.out;
+        }
+
+        return {startingPlayersList, substitutes};
+    };
+
+export const isInStartingPlayersList = (startingPlayersList: PlayerWithRole[], playerName: string): boolean => {
+    let isFound:boolean = false;
+
+    startingPlayersList.forEach( p => { if (p.playerName === playerName) {
+            isFound = true;
+        }}
+    );
+
+    return isFound;
+};
+
+export const isInSubstitutesList = (substitutesList: string[], playerName: string): boolean => {
+    return substitutesList.indexOf(playerName) !== -1;
 };

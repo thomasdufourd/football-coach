@@ -68,19 +68,3 @@ export const mapToSvgPlayers = (playersWithRole: PlayerWithRole[], schema: Tacti
         }
     });
 };
-
-export const applySubstitutionToStartingPlayersListAndSubstitutes =
-    (startingPlayersList: PlayerWithRole[], substitutes: string[], substitution: Substitution):
-        {startingPlayersList: PlayerWithRole[], substitutes: string[]} => {
-
-    startingPlayersList.map( p => { if (p.playerName === substitution.out) {
-        p.playerName = substitution.in;
-    }
-    });
-
-    if (substitutes.indexOf(substitution.in) !== -1) {
-        substitutes[substitutes.indexOf(substitution.in)] = substitution.out;
-    }
-
-    return {startingPlayersList, substitutes};
-};

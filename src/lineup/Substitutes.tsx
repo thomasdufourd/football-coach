@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PlayerSvg from "./PlayerSvg";
+import SubstitutePlayerSvg from "./SubstitutePlayerSvg";
 
 
 interface Props {
@@ -16,12 +16,12 @@ export const Substitutes: React.FunctionComponent<Props> = props => {
                 return (
                     <div className="scaling-svg-container" key={substituteName}>
                         <svg className="scaling-svg" viewBox="0 0 400 60">
-                            <PlayerSvg
+                            <SubstitutePlayerSvg
                                 xposition={50}
                                 yposition={20}
                                 name={substituteName}
                             >
-                            </PlayerSvg>
+                            </SubstitutePlayerSvg>
                         </svg>
                     </div>
                 );

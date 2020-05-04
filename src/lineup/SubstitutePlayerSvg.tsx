@@ -1,7 +1,11 @@
 import * as React from 'react';
 import {useContext} from 'react';
 import {SubstitutionContext} from "../substitution/SubstitutionProvider";
-import {getNewSubstitutionWithSelectedPlayer, isInSubstitution} from "../substitution/SubstitutionUtils";
+import {
+    emptySubstitution,
+    getNewSubstitutionWithSelectedPlayer,
+    isInSubstitution
+} from "../substitution/SubstitutionUtils";
 
 interface Props {
     name: string;
@@ -10,7 +14,7 @@ interface Props {
 }
 
 
-const PlayerSvg: React.FunctionComponent<Props> = props => {
+const SubstitutePlayerSvg: React.FunctionComponent<Props> = props => {
 
     const {getSubstitution, setSubstitution} = useContext(SubstitutionContext);
 
@@ -26,7 +30,11 @@ const PlayerSvg: React.FunctionComponent<Props> = props => {
             <circle cx="0" cy="0" r="10" transform={position}
                     fill={isInSubstitution(props.name, getSubstitution())? "red" : "grey"}
                     onClick={event => {
-                        setSubstitution(getNewSubstitutionWithSelectedPlayer(props.name, getSubstitution()));
+                        if (getSubstitution().status === "Empty") {
+                          setSubstitution(getNewSubstitutionWithSelectedPlayer(props.name, getSubstitution()));
+                        } else {
+                            setSubstitution(emptySubstitution);
+                        }
                         console.log(`Event ${event.type} on ${props.name}`);
                     }}
             />
@@ -43,4 +51,4 @@ const PlayerSvg: React.FunctionComponent<Props> = props => {
     );
 };
 
-export default PlayerSvg;
+export default SubstitutePlayerSvg;

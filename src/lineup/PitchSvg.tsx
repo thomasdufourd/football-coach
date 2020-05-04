@@ -107,7 +107,9 @@ const PitchSvg: React.FunctionComponent<Props> = (props: Props) => {
                                         stroke="black"
                                         strokeWidth="5"
                                         onClick={event => {
-                                            setSubstitution(getNewSubstitutionWithSelectedPlayer(player.name, getSubstitution()));
+                                            if (getSubstitution().status === "In") {
+                                                setSubstitution(getNewSubstitutionWithSelectedPlayer(player.name, getSubstitution()));
+                                            }
                                             console.log(message + " /" + player.name)
                                         }}
                                 />
