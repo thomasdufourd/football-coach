@@ -1,73 +1,57 @@
-import {__2_3_1, __3_3_2, __4_3_1, __7er, __9er, Lineup, Role,} from "../domain/PlayerUtils";
-import {CandidatePlayer} from "../teams/Teams";
+import {CandidatePlayer, CandidateTeam} from "../teams/Teams";
+import {__7er, __9er} from "../domain/PlayerUtils";
 
-// Lineups G2008
-/*export const teamG2008Lag1: CandidatePlayer[] = [
-        {playerName: 'Tobias', },
-        {playerName: 'Sivert', role: Role.LEFT_BACK},
-        {playerName: 'Juster', role: Role.CENTRE_BACK_LEFT},
-        {playerName: 'Storm', role: Role.CENTRE_BACK_RIGHT},
-        {playerName: 'August B', role: Role.RIGHT_BACK},
-        {playerName: 'Lukas', role: Role.LEFT_WING},
-        {playerName: 'Theo', role: Role.BOX_TO_BOX_MIDFIELD},
-        {playerName: 'Dominic', role: Role.RIGHT_WING},
-        {playerName: 'Patricio', role: Role.STRIKER}
-    ],
-    substitutes: [
-        'Nedim', 'Max', 'Amund SF'
-    ]
-};*/
-
-export const lineupG2008Lag2: Lineup = {
-    team: {
-        group: {
-            name: "G2008",
-            yearOfBirth: 2008, gender: "boy", players: [] // TODO: populate with all players
-        },
-        name: "Lag #2",
-        order: 2,
-        players: [],
-        tacticalSchemaType: __9er
-    },
-    schema: __3_3_2,
-    starting: [
-        {playerName: 'Mats', role: Role.GOAL_KEEPER},
-        {playerName: 'Amund SA', role: Role.LEFT_WING},
-        {playerName: 'Max', role: Role.CENTRE_BACK_LEFT},
-        {playerName: 'Martin', role: Role.CENTRE_BACK_RIGHT},
-        {playerName: 'Mahdi', role: Role.RIGHT_WING},
-        {playerName: 'Aleksa', role: Role.DEFENSIVE_MIDFIELD},
-        {playerName: 'Fredrik', role: Role.LEFT_MIDFIELD},
-        {playerName: 'Aleks', role: Role.OFFENSIVE_MIDFIELD},
-        {playerName: 'Joel', role: Role.RIGHT_MIDFIELD}
-    ],
-    substitutes: [
-        'Daniel', 'Jonathan', 'August DN'
+// Teams G2008
+export const teamG2008Lag1: CandidateTeam = {
+    name: 'Lag #1',
+    schema: __9er,
+    candidatePlayers: [
+        {playerName: 'Tobias', id:`playercandidate-tobias1-${new Date().getTime()}`},
+        {playerName: 'Sivert', id:`playercandidate-sivert-${new Date().getTime()}`},
+        {playerName: 'Juster', id:`playercandidate-juster-${new Date().getTime()}`},
+        {playerName: 'Storm', id:`playercandidate-storm-${new Date().getTime()}`},
+        {playerName: 'August B', id:`playercandidate-augustb-${new Date().getTime()}`},
+        {playerName: 'Lukas', id:`playercandidate-lukas-${new Date().getTime()}`},
+        {playerName: 'Theo', id:`playercandidate-theo-${new Date().getTime()}`},
+        {playerName: 'Dominic', id:`playercandidate-dominic-${new Date().getTime()}`},
+        {playerName: 'Nedim', id:`playercandidate-nedim-${new Date().getTime()}`},
+        {playerName: 'Max', id:`playercandidate-max1-${new Date().getTime()}`},
+        {playerName: 'Amund SF', id:`playercandidate-amundsf-${new Date().getTime()}`},
+        {playerName: 'Patricio', id:`playercandidate-patricio-${new Date().getTime()}`}
     ]
 };
 
-export const lineupG2008Lag3: Lineup = {
-    team: {
-        group: {
-            name: "G2008",
-            yearOfBirth: 2008, gender: "boy", players: [] // TODO: populate with all players
-        },
-        name: "Lag #3",
-        order: 3,
-        players: [],
-        tacticalSchemaType: __7er
-    },
-    schema: __2_3_1,
-    starting: [
-        {playerName: 'Mats', role: Role.GOAL_KEEPER},
-        {playerName: 'Max', role: Role.CENTRE_BACK_LEFT},
-        {playerName: 'Behez', role: Role.CENTRE_BACK_RIGHT},
-        {playerName: 'Joel', role: Role.LEFT_MIDFIELD},
-        {playerName: 'Tobias', role: Role.BOX_TO_BOX_MIDFIELD},
-        {playerName: 'Ali', role: Role.RIGHT_MIDFIELD},
-        {playerName: 'Sufyan', role: Role.STRIKER}
-    ],
-    substitutes: [
-        'Gabriel', 'Ludvik'
-    ]
-};
+export const teamG2008Lag2: CandidateTeam = {
+    name: 'Lag #2',
+    schema: __9er,
+    candidatePlayers: [
+
+        {playerName: 'Mats', id:`playercandidate-mats1-${new Date().getTime()}`},
+    {playerName: 'Amund SA', id:`playercandidate-amundsa-${new Date().getTime()}`},
+    {playerName: 'Max', id:`playercandidate-max2-${new Date().getTime()}`},
+    {playerName: 'Martin', id:`playercandidate-martin-${new Date().getTime()}`},
+    {playerName: 'Mahdi', id:`playercandidate-mahdi-${new Date().getTime()}`},
+    {playerName: 'Aleksa', id:`playercandidate-aleksa-${new Date().getTime()}`},
+    {playerName: 'Fredrik', id:`playercandidate-fredrik-${new Date().getTime()}`},
+    {playerName: 'Aleks', id:`playercandidate-aleks-${new Date().getTime()}`},
+    {playerName: 'Joel', id:`playercandidate-joel1-${new Date().getTime()}`},
+    {playerName: 'Daniel', id:`playercandidate-daniel-${new Date().getTime()}`},
+    {playerName: 'Jonathan', id:`playercandidate-jonathan-${new Date().getTime()}`},
+    {playerName: 'August DN', id:`playercandidate-augustdn-${new Date().getTime()}`}
+]};
+
+
+export const teamG2008Lag3: CandidateTeam = {
+    name: 'Lag #3',
+    schema: __7er,
+    candidatePlayers: [
+    {playerName: 'Mats', id:`playercandidate-mats2-${new Date().getTime()}`},
+    {playerName: 'Max', id:`playercandidate-max3-${new Date().getTime()}`},
+    {playerName: 'Behez', id:`playercandidate-behez-${new Date().getTime()}`},
+    {playerName: 'Joel', id:`playercandidate-joel2-${new Date().getTime()}`},
+    {playerName: 'Tobias', id:`playercandidate-tobias2-${new Date().getTime()}`},
+    {playerName: 'Ali', id:`playercandidate-ali-${new Date().getTime()}`},
+    {playerName: 'Sufyan', id:`playercandidate-sufyan-${new Date().getTime()}`},
+    {playerName: 'Gabriel', id:`playercandidate-gabriel-${new Date().getTime()}`},
+    {playerName: 'Ludvik', id:`playercandidate-ludvik-${new Date().getTime()}`}
+]};
