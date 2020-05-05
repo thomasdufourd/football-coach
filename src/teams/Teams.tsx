@@ -140,7 +140,7 @@ const Teams: React.FunctionComponent<Props> = (props) => {
                             setTeams([...teams, emptyCandidateTeam]);
                         }}
                     >
-                        Add team
+                        Create new team
                     </Button>
                     <Button className="m-1"
                         type="button"
@@ -148,7 +148,7 @@ const Teams: React.FunctionComponent<Props> = (props) => {
                             setTeams([...teams, newCandidateTeamWithOnePlayer]);
                         }}
                     >
-                        Add new player
+                        Invite player
                     </Button>
                 </Col>
             </Row>
@@ -161,9 +161,9 @@ const Teams: React.FunctionComponent<Props> = (props) => {
                 <div>
                     <div style={{display: "flex"}}>
                         <DragDropContext onDragEnd={onDragEnd}>
-                            {teams.map((el, ind) => (
+                            {teams.map((team, ind) => (
                                 <Col key={ind}>
-                                    <h4> {el.name} {el.schema.name} </h4>
+                                    <h4> {team.name} {team.schema.name} </h4>
                                     <Droppable key={ind} droppableId={`${ind}`}>
                                     {(provided, snapshot) => (
                                         <div
@@ -171,10 +171,10 @@ const Teams: React.FunctionComponent<Props> = (props) => {
                                             style={getListStyle(snapshot.isDraggingOver)}
                                             {...provided.droppableProps}
                                         >
-                                            {el.candidatePlayers.map((item, index) => (
+                                            {team.candidatePlayers.map((candidatePlayer, index) => (
                                                 <Draggable
-                                                    key={item.id}
-                                                    draggableId={item.id}
+                                                    key={candidatePlayer.id}
+                                                    draggableId={candidatePlayer.id}
                                                     index={index}
                                                 >
                                                     {(provided, snapshot) => (
@@ -193,13 +193,13 @@ const Teams: React.FunctionComponent<Props> = (props) => {
                                                                     justifyContent: "space-around"
                                                                 }}
                                                             >
-                                                                {item.playerName}
+                                                                {candidatePlayer.playerName}
                                                                 <Button
                                                                     type="button"
                                                                     onClick={() => {
-                                                                        console.log(`playerId=${item.id}, playerName=${item.playerName}`);
+                                                                        console.log(`playerId=${candidatePlayer.id}, playerName=${candidatePlayer.playerName}`);
 
-                                                                        const newState = [...teams];
+                                                                        const newState: CandidateTeam[] = [...teams];
                                                                         newState[ind].candidatePlayers.splice(index, 1);
                                                                         setTeams(
                                                                             newState.filter(group => group.candidatePlayers.length)

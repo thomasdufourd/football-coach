@@ -11,7 +11,7 @@ import PitchSvg from "./lineup/PitchSvg";
 import { empty_tactical_schema } from "./domain/PlayerUtils";
 import {SubstitutionProvider} from "./substitution/SubstitutionProvider";
 
-export const PATH_FRONTPAGE = '/';
+export const PATH_FRONTPAGE = '/assistantcoach';
 export const PATH_LINEUPS = '/lineups';
 export const PATH_TEAMS = '/teams';
 
@@ -30,10 +30,10 @@ const AppContent: FunctionComponent = () => {
         <>
             <Route path={PATH_FRONTPAGE} exact={true}>
                 <Container>
-                    <Row>
-                        <h4> </h4>
+                    <Row className="mt-2">
+                        <h1>Football</h1>
                     </Row>
-                    <Row>
+                    <Row className="mt-2">
                         <Col sm={8}>
                             <div className="scaling-svg-container">
                                 <svg className="scaling-svg" viewBox="0 0 1000 585">
@@ -60,7 +60,7 @@ const AppContent: FunctionComponent = () => {
     return (
         <>
             <Banner
-                title="Football Coach app"
+                title="Assistant Coach"
             />
             {innhold}
         </>
