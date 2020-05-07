@@ -1,5 +1,5 @@
 {
-  "name": "Assistant coach",
+  "name": "assistantcoach",
   "version": "0.1.0",
   "private": true,
   "homepage": "/assistantcoach",
@@ -32,6 +32,7 @@
     "react-beautiful-dnd": "^13.0.0",
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
+    "react-icons": "^3.10.0",
     "react-loading-skeleton": "^2.0.1",
     "react-motion": "^0.5.2",
     "react-responsive": "^8.0.3",

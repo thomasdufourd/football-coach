@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {useState} from 'react';
-import {Breadcrumb, Button, Col, Container, Row} from "react-bootstrap";
+import {Breadcrumb, Button, Col, Container, Modal, Row} from "react-bootstrap";
+import {BsXCircleFill} from 'react-icons/bs';
 import {DragDropContext, Draggable, Droppable, DropResult} from 'react-beautiful-dnd';
 import {teamG2008Lag1, teamG2008Lag2, teamG2008Lag3} from "../mocking/TeamsMockdata";
 import {__9er, TacticalSchemaType} from "../domain/PlayerUtils";
@@ -30,14 +31,6 @@ export interface CandidatePlayer {
     playerName: string;
 }
 
-
-// fake data generator
-const getCandidatePlayers = (count: number, offset = 0): CandidatePlayer[] => {
-    return Array.from({length: count}, (v, k) => k).map(k => ({
-        id: `item-${k + offset}-${new Date().getTime()}`,
-        playerName: `player ${k + offset}`
-    }))
-};
 
 const reorder = (list: CandidatePlayer[], startIndex: number, endIndex: number):CandidatePlayer[] => {
     const result = Array.from(list);
@@ -88,6 +81,9 @@ const getListStyle = (isDraggingOver: boolean) => ({
 
 const Teams: React.FunctionComponent<Props> = (props) => {
     const [teams, setTeams] = useState([teamG2008Lag1, teamG2008Lag2, teamG2008Lag3]);
+    const [showInvitePlayerModal, setShowInvitePlayerModal] = useState(false);
+
+    const handleCloseInvitePlayerModal = () => setShowInvitePlayerModal(false);
 
     function onDragEnd(result: DropResult):void {
         const {source, destination} = result;
@@ -119,6 +115,7 @@ const Teams: React.FunctionComponent<Props> = (props) => {
     }
 
 
+    // @ts-ignore
     return (
         <Container>
             <Breadcrumb>
@@ -143,13 +140,36 @@ const Teams: React.FunctionComponent<Props> = (props) => {
                         Create new team
                     </Button>
                     <Button className="m-1"
-                        type="button"
-                        onClick={() => {
-                            setTeams([...teams, newCandidateTeamWithOnePlayer]);
-                        }}
+                            type="button"
+                            onClick={() => {
+                                setTeams([...teams, newCandidateTeamWithOnePlayer]);
+                            }}
+                    >
+                        Add player
+                    </Button>
+                    <Button className="m-1"
+                            type="button"
+                            onClick={() => {
+                                setShowInvitePlayerModal(true);
+                            }}
                     >
                         Invite player
                     </Button>
+                    <Modal show={showInvitePlayerModal} onHide={handleCloseInvitePlayerModal} centered={true}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Invite player</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>Provide the name and group of the player you invite</Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" >
+                                Close
+                            </Button>
+                            <Button variant="primary">
+                                Save Changes
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+
                 </Col>
             </Row>
 
@@ -189,25 +209,26 @@ const Teams: React.FunctionComponent<Props> = (props) => {
                                                         >
                                                             <div
                                                                 style={{
+                                                                    height: 30,
                                                                     display: "flex",
-                                                                    justifyContent: "space-around"
+                                                                    justifyContent: "space-around",
+                                                                    alignContent: "baseline"
                                                                 }}
                                                             >
                                                                 {candidatePlayer.playerName}
-                                                                <Button
-                                                                    type="button"
-                                                                    onClick={() => {
-                                                                        console.log(`playerId=${candidatePlayer.id}, playerName=${candidatePlayer.playerName}`);
-
+                                                                <div>
+                                                                    <BsXCircleFill                                                                     onClick={() => {
+                                                                        console.log(`playerId=${candidatePlayer.id}, 
+                                                                        playerName=${candidatePlayer.playerName}`);
                                                                         const newState: CandidateTeam[] = [...teams];
                                                                         newState[ind].candidatePlayers.splice(index, 1);
                                                                         setTeams(
                                                                             newState.filter(group => group.candidatePlayers.length)
                                                                         );
                                                                     }}
-                                                                >
-                                                                    remove
-                                                                </Button>
+                                                                    />
+
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     )}

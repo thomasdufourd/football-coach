@@ -16,13 +16,13 @@ const Banner: React.FunctionComponent<Props> = (props) => {
                 <Nav className="mr-auto">
                     <Nav.Link href={`${BASE_PATH}/teams`}>Teams</Nav.Link>
                     <Nav.Link href={`${BASE_PATH}/lineups`}>Lineups</Nav.Link>
+                    <Nav.Link href={`${BASE_PATH}/training`}>Training</Nav.Link>
                     <NavDropdown title="G2008" id="collasible-nav-dropdown">
-                        <NavDropdown.Item href={`${BASE_PATH}/G2008/players`}>Players list</NavDropdown.Item>
-                        <NavDropdown.Item href={`${BASE_PATH}/G2008/trainingsessions`}>Training sessions</NavDropdown.Item>
-                        <NavDropdown.Item href={`${BASE_PATH}/G2008/season`}>Season</NavDropdown.Item>
-                        <NavDropdown.Item href={`${BASE_PATH}/G2008/cups`}>Cups</NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item href={`${BASE_PATH}/G2008/admin`}>Admin G2008</NavDropdown.Item>
+                        <NavDropdown.Item href={`${BASE_PATH}/G2008/players`}>Players</NavDropdown.Item>
+                        <NavDropdown.Item href={`${BASE_PATH}/G2008/coaches`}>Coaches</NavDropdown.Item>
+                        <NavDropdown.Item href={`${BASE_PATH}/G2008/calendar`}>Calendar</NavDropdown.Item>
+                        <NavDropdown.Divider/>
+                        <NavDropdown.Item href={`${BASE_PATH}/groups`}>Other groups</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
                 <Nav>
