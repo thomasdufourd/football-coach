@@ -4,25 +4,27 @@ import {BASE_PATH} from '../server/constants';
 
 interface Props {
     title: string;
+    isAdmin: boolean;
 }
 
 const Banner: React.FunctionComponent<Props> = (props) => {
 
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-            <Navbar.Brand href="#home">{props.title}</Navbar.Brand>
+            <Navbar.Brand href="/home">{props.title}</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
+                    <Nav.Link href={`${BASE_PATH}/training`}>Training</Nav.Link>
                     <Nav.Link href={`${BASE_PATH}/teams`}>Teams</Nav.Link>
                     <Nav.Link href={`${BASE_PATH}/lineups`}>Lineups</Nav.Link>
-                    <Nav.Link href={`${BASE_PATH}/training`}>Training</Nav.Link>
+                    <Nav.Link href={`${BASE_PATH}/competition`}>Competition</Nav.Link>
                     <NavDropdown title="G2008" id="collasible-nav-dropdown">
                         <NavDropdown.Item href={`${BASE_PATH}/G2008/players`}>Players</NavDropdown.Item>
-                        <NavDropdown.Item href={`${BASE_PATH}/G2008/coaches`}>Coaches</NavDropdown.Item>
+                        <NavDropdown.Item href={`${BASE_PATH}/G2008/staff`}>Staff</NavDropdown.Item>
                         <NavDropdown.Item href={`${BASE_PATH}/G2008/calendar`}>Calendar</NavDropdown.Item>
                         <NavDropdown.Divider/>
-                        <NavDropdown.Item href={`${BASE_PATH}/groups`}>Other groups</NavDropdown.Item>
+                        <NavDropdown.Item href={`${BASE_PATH}/groups`} disabled={!props.isAdmin}>Other groups</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
                 <Nav>

@@ -10,8 +10,9 @@ import {Col, Container, Row} from "react-bootstrap";
 import PitchSvg from "./lineup/PitchSvg";
 import { empty_tactical_schema } from "./domain/PlayerUtils";
 import {SubstitutionProvider} from "./substitution/SubstitutionProvider";
+import HomePage from "./home/HomePage";
 
-export const PATH_FRONTPAGE = '/assistantcoach';
+export const PATH_FRONTPAGE = '/home';
 export const PATH_LINEUPS = '/lineups';
 export const PATH_TEAMS = '/teams';
 
@@ -29,20 +30,7 @@ const AppContent: FunctionComponent = () => {
     let innhold = (
         <>
             <Route path={PATH_FRONTPAGE} exact={true}>
-                <Container>
-                    <Row className="mt-2">
-                        <h1>Football</h1>
-                    </Row>
-                    <Row className="mt-2">
-                        <Col sm={8}>
-                            <div className="scaling-svg-container">
-                                <svg className="scaling-svg" viewBox="0 0 1000 585">
-                                    <PitchSvg playersOnField={[]} schema={empty_tactical_schema}/>
-                                </svg>
-                            </div>
-                        </Col>
-                    </Row>
-                </Container>
+                <HomePage/>
             </Route>
             <Route path={PATH_TEAMS} exact={true}>
                 <Teams group="G2008"/>
@@ -61,6 +49,7 @@ const AppContent: FunctionComponent = () => {
         <>
             <Banner
                 title="Assistant Coach"
+                isAdmin={false}
             />
             {innhold}
         </>
