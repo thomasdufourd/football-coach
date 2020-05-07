@@ -79,7 +79,7 @@ const getListStyle = (isDraggingOver: boolean) => ({
 });
 
 
-const Teams: React.FunctionComponent<Props> = (props) => {
+const TeamsBoard: React.FunctionComponent<Props> = (props) => {
     const [teams, setTeams] = useState([teamG2008Lag1, teamG2008Lag2, teamG2008Lag3]);
     const [showInvitePlayerModal, setShowInvitePlayerModal] = useState(false);
 
@@ -248,4 +248,4 @@ const Teams: React.FunctionComponent<Props> = (props) => {
     );
 };
 
-export default Teams;
+export default TeamsBoard;

@@ -1,7 +1,7 @@
-import {CandidatePlayer, CandidateTeam} from "../teams/Teams";
+import {CandidatePlayer, CandidateTeam} from "../teams/TeamsBoard";
 import {__7er, __9er} from "../domain/PlayerUtils";
 
-// Teams G2008
+// TeamsBoard G2008
 export const teamG2008Lag1: CandidateTeam = {
     name: 'Lag #1',
     schema: __9er,

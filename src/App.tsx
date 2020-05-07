@@ -4,17 +4,19 @@ import {BASE_PATH} from './server/constants';
 
 import './App.scss';
 import Banner from "./navigation/Banner";
-import Teams from "./teams/Teams";
+import TeamsBoard from "./teams/TeamsBoard";
 import LineupBoard from './lineup/LineupBoard';
 import {Col, Container, Row} from "react-bootstrap";
 import PitchSvg from "./lineup/PitchSvg";
 import { empty_tactical_schema } from "./domain/PlayerUtils";
 import {SubstitutionProvider} from "./substitution/SubstitutionProvider";
 import HomePage from "./home/HomePage";
+import TeamsOverview from "./teams/TeamsOverview";
 
 export const PATH_FRONTPAGE = '/home';
 export const PATH_LINEUPS = '/lineups';
 export const PATH_TEAMS = '/teams';
+export const PATH_SPESIFIC_TEAM = '/teams/thisisalongid';
 
 
 const App: FunctionComponent = () => {
@@ -33,8 +35,12 @@ const AppContent: FunctionComponent = () => {
                 <HomePage/>
             </Route>
             <Route path={PATH_TEAMS} exact={true}>
-                <Teams group="G2008"/>
+                <TeamsOverview group="G2008"/>
             </Route>
+            <Route path={PATH_SPESIFIC_TEAM} exact={true}>
+                <TeamsBoard group="G2008"/>
+            </Route>
+
             <Route path={PATH_LINEUPS} exact={true}>
                 <SubstitutionProvider>
                 <LineupBoard group="G2008"/>
