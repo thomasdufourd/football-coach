@@ -2,12 +2,11 @@ import {
     __3_3_2, __3_3_2_til__4_3_1_conversion_table,
     __4_3_1,
     __4_3_1_til__3_3_2_conversion_table,
-    getCoordinatesFromRole, Lineup,
+    getCoordinatesFromRole,
     PlayerWithRole,
     Role,
     TacticalSchema
 } from "../domain/PlayerUtils";
-import {Substitution} from "../substitution/SubstitutionUtils";
 
 export interface SvgDrawyablePlayer {
     name: string;

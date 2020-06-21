@@ -2,7 +2,7 @@ import * as React from 'react';
 import './SubstitutionInfoPanel.scss';
 import {FunctionComponent, useContext} from 'react';
 import {SubstitutionContext} from "./SubstitutionProvider";
-import {Button, Col} from "react-bootstrap";
+import {Button} from "react-bootstrap";
 import {
     applySubstitutionToStartingPlayersListAndSubstitutes,
     emptySubstitution,

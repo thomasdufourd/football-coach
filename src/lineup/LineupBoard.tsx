@@ -1,14 +1,13 @@
 import * as React from 'react';
 import './LineupBoard.scss';
 import PitchSvg from "./PitchSvg";
-import {Button, Col, Container, Dropdown, ListGroup, Row} from "react-bootstrap";
+import {Button, Col, Container, Dropdown, Row} from "react-bootstrap";
 import {__3_3_2, __4_3_1, emptyLineup, emptyTacticalSchema, emptyTeam, Lineup, Team} from "../domain/PlayerUtils";
 import {lineupG2008Lag1, lineupG2008Lag2, lineupG2008Lag3} from "../mocking/LineupMockdata"
 import {SubstitutionInfoPanel} from "../substitution/SubstitutionInfoPanel";
 import {SubstitutionContext} from "../substitution/SubstitutionProvider";
 import {emptySubstitution} from "../substitution/SubstitutionUtils";
 import {applySchema, emptyPlayerOnFieldListAtStart} from "./LineupUtils";
-import {Substitutes} from "./Substitutes";
 
 interface Props {
     group: string;
@@ -19,7 +18,6 @@ interface Props {
 const LineupBoard: React.FunctionComponent<Props> = (props) => {
 
     const [team, setTeam] = React.useState(emptyTeam);
-    const [chosenLineup, setChosenLineup] = React.useState(emptyLineup);
     const [substitutes, setSubstitutes] = React.useState(emptyLineup.substitutes);
     const [startingPlayersList, setStartingPlayersList] = React.useState(emptyPlayerOnFieldListAtStart);
     const [chosenSchema, setChosenSchema] = React.useState(emptyTacticalSchema);
@@ -58,7 +56,6 @@ const LineupBoard: React.FunctionComponent<Props> = (props) => {
                                         <Dropdown.Item key={team.order} onSelect={ () => {
                                             setTeam(team);
                                             const lineup = getLineup(team);
-                                            setChosenLineup(lineup);
                                             setStartingPlayersList(lineup.starting);
                                             setSubstitutes(lineup.substitutes);
                                             setChosenSchema(lineup.schema);

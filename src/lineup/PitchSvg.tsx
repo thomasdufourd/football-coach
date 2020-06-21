@@ -4,10 +4,8 @@ import {PlayerWithRole, TacticalSchema} from "../domain/PlayerUtils";
 import {mapToSvgPlayers} from "./LineupUtils";
 import {SubstitutionContext} from "../substitution/SubstitutionProvider";
 import {
-    emptySubstitution,
     getNewSubstitutionWithSelectedPlayer,
-    isInSubstitution,
-    Substitution
+    isInSubstitution
 } from "../substitution/SubstitutionUtils";
 
 
