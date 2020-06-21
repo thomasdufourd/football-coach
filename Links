@@ -39,12 +39,38 @@ https://css-tricks.com/scale-svg/
 Drawing
 https://vectr.com/
 
+https://flaviocopes.com/svg/
+
+
+Animating SVG
+-------------
+https://svgjs.com/docs/3.0/tutorials/ 
+https://css-tricks.com/pong-svg-js/
+https://www.youtube.com/watch?v=sxte3WpyO60 
+https://thednp.github.io/kute.js/ --> KuteJS
+http://thednp.github.io/kute.js/svg.html
+http://snapsvg.io/
+
+Animations
+----------
+https://animejs.com/
+https://www.npmjs.com/package/react-animejs -> React
+https://alain.xyz/libraries/react-anime ---> anime everything
+
 
 React and SVG
 -------------
 https://medium.com/trbl/representing-dynamic-data-using-react-and-svg-part-one-84c8ed1737c7 (3 parts)
 https://blog.logrocket.com/how-to-use-svgs-in-react/
 https://medium.com/@timothyde/flexible-svg-components-in-react-788b108c61c3
+
+// create short cartoons
+https://www.react-spring.io/docs/props/keyframes
+https://github.com/react-spring/react-spring-examples/blob/renderprops/demos/renderprops/script/index.js
+
+Video animations
+----------------
+https://www.youtube.com/watch?v=PA6hxeptXCs
 
 
 Drag and Drop
@@ -70,5 +96,30 @@ Bootstrap
 https://css-tricks.com/snippets/css/a-guide-to-flexbox/#flexbox-background 
 https://react-bootstrap.netlify.app/getting-started/introduction/ 
 https://react-bootstrap.github.io/utilities/responsive-embed/ (usefull?)
+
+CSS
+---
+Chakra:
+https://chakra-ui.com
+https://github.com/selbekk/tekststyring
+https://codesandbox.io/s/github/selbekk/tekststyring?file=/src/pages/TextPage.tsx
+Icons:
+https://react-icons.github.io/
+https://chakra-ui.com/icon
+Downloaded icons: 
+https://www.flaticon.com/free-icon/football-player-kicking-ball_27080
+
+
+CSS positioning
+---------------
+https://www.jqueryscript.net/chart-graph/Soccer-Field-Players-Positions.html
+https://www.jqueryscript.net/demo/Soccer-Field-Players-Positions/
+
+Hooks
+-----
+https://www.codementor.io/@sambhavgore/an-example-use-context-and-hooks-to-share-state-between-different-components-sgop6lnrd
+
+
+
 
 

@@ -85,7 +85,7 @@ const HomePage: React.FunctionComponent = () => {
                     <Card border="dark" style={{width: '17rem'}}>
                         <Link
                             to={{
-                                pathname: "/teams",
+                                pathname: "/competitions",
                                 search: location.search,
                             }}
                         >
@@ -103,7 +103,7 @@ const HomePage: React.FunctionComponent = () => {
                                 Go to {' '}
                                 <Link
                                     to={{
-                                        pathname: "/teams",
+                                        pathname: "/competitions",
                                         search: location.search,
                                     }}
                                 >

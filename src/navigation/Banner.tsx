@@ -18,7 +18,7 @@ const Banner: React.FunctionComponent<Props> = (props) => {
                     <Nav.Link href={`${BASE_PATH}/training`}>Training</Nav.Link>
                     <Nav.Link href={`${BASE_PATH}/teams`}>Teams</Nav.Link>
                     <Nav.Link href={`${BASE_PATH}/lineups`}>Lineups</Nav.Link>
-                    <Nav.Link href={`${BASE_PATH}/competition`}>Competition</Nav.Link>
+                    <Nav.Link href={`${BASE_PATH}/competitions`}>Competitions</Nav.Link>
                     <NavDropdown title="G2008" id="collasible-nav-dropdown">
                         <NavDropdown.Item href={`${BASE_PATH}/G2008/players`}>Players</NavDropdown.Item>
                         <NavDropdown.Item href={`${BASE_PATH}/G2008/staff`}>Staff</NavDropdown.Item>

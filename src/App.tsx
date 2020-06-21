@@ -12,11 +12,13 @@ import { empty_tactical_schema } from "./domain/PlayerUtils";
 import {SubstitutionProvider} from "./substitution/SubstitutionProvider";
 import HomePage from "./home/HomePage";
 import TeamsOverview from "./teams/TeamsOverview";
+import CompetitionHomePage from "./competition/CompetitionHomePage";
 
 export const PATH_FRONTPAGE = '/home';
 export const PATH_LINEUPS = '/lineups';
 export const PATH_TEAMS = '/teams';
 export const PATH_SPESIFIC_TEAM = '/teams/thisisalongid';
+export const PATH_COMPETITTION = '/competitions';
 
 
 const App: FunctionComponent = () => {
@@ -40,11 +42,13 @@ const AppContent: FunctionComponent = () => {
             <Route path={PATH_SPESIFIC_TEAM} exact={true}>
                 <TeamsBoard group="G2008"/>
             </Route>
-
             <Route path={PATH_LINEUPS} exact={true}>
                 <SubstitutionProvider>
                 <LineupBoard group="G2008"/>
                     </SubstitutionProvider>
+            </Route>
+            <Route path={PATH_COMPETITTION} exact={true}>
+                <CompetitionHomePage group="G2008"/>
             </Route>
 
         </>
