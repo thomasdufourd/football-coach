@@ -11,7 +11,7 @@ const Banner: React.FunctionComponent<Props> = (props) => {
 
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-            <Navbar.Brand href="/assistantcoach">{props.title}</Navbar.Brand>
+            <Navbar.Brand href={`${BASE_PATH}/index.html`}>{props.title}</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
