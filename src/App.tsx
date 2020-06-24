@@ -10,10 +10,12 @@ import {SubstitutionProvider} from "./substitution/SubstitutionProvider";
 import HomePage from "./home/HomePage";
 import TeamsOverview from "./teams/TeamsOverview";
 import CompetitionHomePage from "./competition/CompetitionHomePage";
+import TrainingSessionsBoard from "./training/TrainingSessionsBoard";
 
 export const PATH_FRONTPAGE = '/';
-export const PATH_LINEUPS = '/lineups';
+export const PATH_TRAINING = '/training';
 export const PATH_TEAMS = '/teams';
+export const PATH_LINEUPS = '/lineups';
 export const PATH_SPESIFIC_TEAM = '/teams/thisisalongid';
 export const PATH_COMPETITTION = '/competitions';
 
@@ -32,6 +34,9 @@ const AppContent: FunctionComponent = () => {
         <>
             <Route path={PATH_FRONTPAGE} exact={true}>
                 <HomePage/>
+            </Route>
+            <Route path={PATH_TRAINING} exact={true}>
+                <TrainingSessionsBoard group="G2008"/>
             </Route>
             <Route path={PATH_TEAMS} exact={true}>
                 <TeamsOverview group="G2008"/>
