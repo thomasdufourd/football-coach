@@ -11,8 +11,10 @@ import HomePage from "./home/HomePage";
 import TeamsOverview from "./teams/TeamsOverview";
 import CompetitionHomePage from "./competition/CompetitionHomePage";
 import TrainingSessionsBoard from "./training/TrainingSessionsBoard";
+import WorkInProgressPage from "./WorkInProgressPage";
 
 export const PATH_FRONTPAGE = '/';
+export const TEMP_PATH_WORK_IN_PROGRESS = '/wip';
 export const PATH_TRAINING = '/training';
 export const PATH_TEAMS = '/teams';
 export const PATH_LINEUPS = '/lineups';
@@ -35,6 +37,9 @@ const AppContent: FunctionComponent = () => {
             <Route path={PATH_FRONTPAGE} exact={true}>
                 <HomePage/>
             </Route>
+            <Route path={TEMP_PATH_WORK_IN_PROGRESS} exact={true}>
+                <WorkInProgressPage/>
+            </Route>
             <Route path={PATH_TRAINING} exact={true}>
                 <TrainingSessionsBoard group="G2008"/>
             </Route>
@@ -51,6 +56,16 @@ const AppContent: FunctionComponent = () => {
             </Route>
             <Route path={PATH_COMPETITTION} exact={true}>
                 <CompetitionHomePage group="G2008"/>
+            </Route>
+
+            <Route path={'/G2008/players'} exact={true}>
+                <WorkInProgressPage/>
+            </Route>
+            <Route path={'/G2008/staff'} exact={true}>
+                <WorkInProgressPage/>
+            </Route>
+            <Route path={'/G2008/calendar'} exact={true}>
+                <WorkInProgressPage/>
             </Route>
 
         </>
