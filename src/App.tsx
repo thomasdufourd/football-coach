@@ -11,7 +11,7 @@ import HomePage from "./home/HomePage";
 import TeamsOverview from "./teams/TeamsOverview";
 import CompetitionHomePage from "./competition/CompetitionHomePage";
 
-export const PATH_FRONTPAGE = '/home';
+export const PATH_FRONTPAGE = '/';
 export const PATH_LINEUPS = '/lineups';
 export const PATH_TEAMS = '/teams';
 export const PATH_SPESIFIC_TEAM = '/teams/thisisalongid';
