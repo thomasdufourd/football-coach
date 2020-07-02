@@ -1,1 +1,14 @@
-#
+# API
+ * Calendar events
+ * Players list
+ * Trainers list
+ * Training sessions list
+ * Regular season
+ * Other competitions
+
+# Calendar
+ * add link to event details (update)
+ * show more events: http://jquense.github.io/react-big-calendar/examples/index.html#popup
+ * fetch events from DB
+ * export to .ics
+

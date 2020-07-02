@@ -12,6 +12,7 @@ import TeamsOverview from "./teams/TeamsOverview";
 import CompetitionHomePage from "./competition/CompetitionHomePage";
 import TrainingSessionsBoard from "./training/TrainingSessionsBoard";
 import WorkInProgressPage from "./WorkInProgressPage";
+import CalendarOverview from "./calendar/CalendarOverview";
 
 export const PATH_FRONTPAGE = '/';
 export const TEMP_PATH_WORK_IN_PROGRESS = '/wip';
@@ -65,7 +66,7 @@ const AppContent: FunctionComponent = () => {
                 <WorkInProgressPage/>
             </Route>
             <Route path={'/G2008/calendar'} exact={true}>
-                <WorkInProgressPage/>
+                <CalendarOverview group="G2008"/>
             </Route>
 
         </>
