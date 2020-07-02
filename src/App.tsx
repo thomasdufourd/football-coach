@@ -21,6 +21,7 @@ export const PATH_TEAMS = '/teams';
 export const PATH_LINEUPS = '/lineups';
 export const PATH_SPESIFIC_TEAM = '/teams/thisisalongid';
 export const PATH_COMPETITTION = '/competitions';
+export const PATH_CALENDAR = '/calendar';
 
 
 const App: FunctionComponent = () => {
@@ -59,13 +60,13 @@ const AppContent: FunctionComponent = () => {
                 <CompetitionHomePage group="G2008"/>
             </Route>
 
-            <Route path={'/G2008/players'} exact={true}>
+            <Route path={'/players'} exact={true}>
                 <WorkInProgressPage/>
             </Route>
-            <Route path={'/G2008/staff'} exact={true}>
+            <Route path={'/staff'} exact={true}>
                 <WorkInProgressPage/>
             </Route>
-            <Route path={'/G2008/calendar'} exact={true}>
+            <Route path={PATH_CALENDAR} exact={true}>
                 <CalendarOverview group="G2008"/>
             </Route>
 

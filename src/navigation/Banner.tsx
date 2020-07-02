@@ -20,9 +20,9 @@ const Banner: React.FunctionComponent<Props> = (props) => {
                     <Nav.Link href={`${BASE_PATH}/lineups`}>Lineups</Nav.Link>
                     <Nav.Link href={`${BASE_PATH}/competitions`}>Competitions</Nav.Link>
                     <NavDropdown title="G2008" id="collasible-nav-dropdown">
-                        <NavDropdown.Item href={`${BASE_PATH}/G2008/players`}>Players</NavDropdown.Item>
-                        <NavDropdown.Item href={`${BASE_PATH}/G2008/staff`}>Staff</NavDropdown.Item>
-                        <NavDropdown.Item href={`${BASE_PATH}/G2008/calendar`}>Calendar</NavDropdown.Item>
+                        <NavDropdown.Item href={`${BASE_PATH}/players`}>Players</NavDropdown.Item>
+                        <NavDropdown.Item href={`${BASE_PATH}/staff`}>Staff</NavDropdown.Item>
+                        <NavDropdown.Item href={`${BASE_PATH}/calendar`}>Calendar</NavDropdown.Item>
                         <NavDropdown.Divider/>
                         <NavDropdown.Item href={`${BASE_PATH}/groups`} disabled={!props.isAdmin}>Other groups</NavDropdown.Item>
                     </NavDropdown>
