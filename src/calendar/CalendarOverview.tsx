@@ -58,7 +58,7 @@ const CalendarOverview: React.FunctionComponent<Props> = (props) => {
             <h1 className="m-2">Calendar for {props.group}</h1>
             <p className="m-2">Training sessions, competitions and other events for your group</p>
 
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show} onHide={handleClose} animation={false}>
                 <Modal.Header closeButton>
                     <Modal.Title>{`${selectedEvent.title}`}</Modal.Title>
                 </Modal.Header>

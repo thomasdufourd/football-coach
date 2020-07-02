@@ -1,11 +1,11 @@
 import * as React from "react";
-import {Alert, Container} from "react-bootstrap";
+import {Alert, Container, Fade} from "react-bootstrap";
 
 
 const WorkInProgressPage: React.FunctionComponent = () => {
     return (
         <Container>
-            <Alert variant="info">
+            <Alert variant="info" transition={Fade}>
                 <Alert.Heading>Work in progress</Alert.Heading>
                 <p>
                     This page is not build yet
