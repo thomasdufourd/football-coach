@@ -1,6 +1,6 @@
 import React, {FunctionComponent} from 'react';
 import {BrowserRouter, Route} from 'react-router-dom';
-import {BASE_PATH} from './server/constants';
+import {BASE_PATH} from './constants';
 
 import './App.scss';
 import Banner from "./navigation/Banner";

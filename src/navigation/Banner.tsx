@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Nav, Navbar, NavDropdown} from "react-bootstrap";
-import {BASE_PATH} from '../server/constants';
+import {BASE_PATH} from '../constants';
 
 interface Props {
     title: string;
