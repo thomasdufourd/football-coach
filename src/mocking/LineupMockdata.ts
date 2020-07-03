@@ -17,15 +17,15 @@ export const lineupG2008Lag1: Lineup = {
     },
     schema: __4_3_1,
     starting: [
-        {playerName: 'Tobias', role: Role.GOAL_KEEPER},
-        {playerName: 'Sivert', role: Role.LEFT_BACK},
-        {playerName: 'Juster', role: Role.CENTRE_BACK_LEFT},
-        {playerName: 'Storm', role: Role.CENTRE_BACK_RIGHT},
-        {playerName: 'August B', role: Role.RIGHT_BACK},
-        {playerName: 'Lukas', role: Role.LEFT_WING},
-        {playerName: 'Theo', role: Role.BOX_TO_BOX_MIDFIELD},
-        {playerName: 'Dominic', role: Role.RIGHT_WING},
-        {playerName: 'Patricio', role: Role.STRIKER}
+        {playerName: 'Goal keeper (GK)', role: Role.GOAL_KEEPER},
+        {playerName: 'Left back (LB)', role: Role.LEFT_BACK},
+        {playerName: 'Center back (CB)', role: Role.CENTRE_BACK_LEFT},
+        {playerName: 'Center back (CB)', role: Role.CENTRE_BACK_RIGHT},
+        {playerName: 'Right back (RB)', role: Role.RIGHT_BACK},
+        {playerName: 'Left Wing (LW)', role: Role.LEFT_WING},
+        {playerName: 'Midfield (MF)', role: Role.BOX_TO_BOX_MIDFIELD},
+        {playerName: 'Right wing (RW)', role: Role.RIGHT_WING},
+        {playerName: 'Striker (ST)', role: Role.STRIKER}
     ],
     substitutes: [
         'Nedim', 'Max', 'Amund SF'
@@ -73,13 +73,13 @@ export const lineupG2008Lag3: Lineup = {
     },
     schema: __2_3_1,
     starting: [
-        {playerName: 'Mats', role: Role.GOAL_KEEPER},
-        {playerName: 'Max', role: Role.CENTRE_BACK_LEFT},
-        {playerName: 'Behez', role: Role.CENTRE_BACK_RIGHT},
-        {playerName: 'Joel', role: Role.LEFT_MIDFIELD},
-        {playerName: 'Tobias', role: Role.BOX_TO_BOX_MIDFIELD},
-        {playerName: 'Ali', role: Role.RIGHT_MIDFIELD},
-        {playerName: 'Sufyan', role: Role.STRIKER}
+        {playerName: 'Goal keeper (GK)', role: Role.GOAL_KEEPER},
+        {playerName: 'Center back (CB)', role: Role.CENTRE_BACK_LEFT},
+        {playerName: 'Center back (CB)', role: Role.CENTRE_BACK_RIGHT},
+        {playerName: 'Left Wing (LW)', role: Role.LEFT_MIDFIELD},
+        {playerName: 'Midfield (MF)', role: Role.BOX_TO_BOX_MIDFIELD},
+        {playerName: 'Right wing (RW)', role: Role.RIGHT_MIDFIELD},
+        {playerName: 'Striker (ST)', role: Role.STRIKER}
     ],
     substitutes: [
         'Gabriel', 'Ludvik'

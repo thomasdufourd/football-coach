@@ -2,7 +2,7 @@ const { FRONTEND_API_PATH } = require('./constants');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const envProperties = {
-    // TODO: config heroku server API_GATEWAY https://football-coach-api.herokuapp.com/
+    // Important: config heroku server API_GATEWAY -> https://football-coach-api.herokuapp.com/
     API_GATEWAY: process.env.API_GATEWAY || 'http://localhost:3001'
 };
 

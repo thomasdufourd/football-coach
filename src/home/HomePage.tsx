@@ -46,6 +46,36 @@ const HomePage: React.FunctionComponent = () => {
                     <Card border="dark" style={{width: '17rem'}}>
                         <Link
                             to={{
+                                pathname: "/competitions",
+                                search: location.search,
+                            }}
+                        >
+                            <Card.Img variant="top" src={trophySvg} style={{padding: '1rem'}}/>
+                        </Link>
+                        <Card.Body>
+
+                            <Card.Title>Competition</Card.Title>
+                            <Card.Text>
+                                Keep sight of your group's upcoming matches. Manage your teams and lineups for the regular championship and cups.
+                            </Card.Text>
+                        </Card.Body>
+                        <Card.Footer>
+                            <small>
+                                Go to {' '}
+                                <Link
+                                    to={{
+                                        pathname: "/competitions",
+                                        search: location.search,
+                                    }}
+                                >
+                                    competition
+                                </Link>
+                            </small>
+                        </Card.Footer>
+                    </Card>
+                    <Card border="dark" style={{width: '17rem'}}>
+                        <Link
+                            to={{
                                 pathname: "/teams",
                                 search: location.search,
                             }}
@@ -78,36 +108,6 @@ const HomePage: React.FunctionComponent = () => {
                                     }}
                                 >
                                     lineups
-                                </Link>
-                            </small>
-                        </Card.Footer>
-                    </Card>
-                    <Card border="dark" style={{width: '17rem'}}>
-                        <Link
-                            to={{
-                                pathname: "/competitions",
-                                search: location.search,
-                            }}
-                        >
-                            <Card.Img variant="top" src={trophySvg} style={{padding: '1rem'}}/>
-                        </Link>
-                        <Card.Body>
-
-                            <Card.Title>Competition</Card.Title>
-                            <Card.Text>
-                                Keep sight of your group's upcoming matches. Manage your teams and lineups for the regular championship and cups.
-                            </Card.Text>
-                        </Card.Body>
-                        <Card.Footer>
-                            <small>
-                                Go to {' '}
-                                <Link
-                                    to={{
-                                        pathname: "/competitions",
-                                        search: location.search,
-                                    }}
-                                >
-                                    competition
                                 </Link>
                             </small>
                         </Card.Footer>

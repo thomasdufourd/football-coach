@@ -16,8 +16,6 @@ const Banner: React.FunctionComponent<Props> = (props) => {
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
                     <Nav.Link href={`${BASE_PATH}/training`}>Training</Nav.Link>
-                    <Nav.Link href={`${BASE_PATH}/teams`}>Teams</Nav.Link>
-                    <Nav.Link href={`${BASE_PATH}/lineups`}>Lineups</Nav.Link>
                     <Nav.Link href={`${BASE_PATH}/competitions`}>Competitions</Nav.Link>
                     <NavDropdown title="G2008" id="collasible-nav-dropdown">
                         <NavDropdown.Item href={`${BASE_PATH}/players`}>Players</NavDropdown.Item>
@@ -27,6 +25,8 @@ const Banner: React.FunctionComponent<Props> = (props) => {
                         <NavDropdown.Item href={`${BASE_PATH}/groups`} disabled={!props.isAdmin}>Other groups</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
+                <Nav.Link href={`${BASE_PATH}/teams`}>Teams</Nav.Link>
+                <Nav.Link href={`${BASE_PATH}/lineups`}>Lineups</Nav.Link>
                 <Nav>
                     <Nav.Link href={`${BASE_PATH}/about`}>About</Nav.Link>
                     <Nav.Link eventKey={2} href={`${BASE_PATH}/contact`}>
