@@ -53,8 +53,8 @@ const AppContent: FunctionComponent = () => {
             </Route>
             <Route path={PATH_LINEUPS} exact={true}>
                 <SubstitutionProvider>
-                <LineupBoard group="G2008"/>
-                    </SubstitutionProvider>
+                    <LineupBoard group="G2008"/>
+                </SubstitutionProvider>
             </Route>
             <Route path={PATH_COMPETITTION} exact={true}>
                 <CompetitionHomePage group="G2008"/>
@@ -69,7 +69,6 @@ const AppContent: FunctionComponent = () => {
             <Route path={PATH_CALENDAR} exact={true}>
                 <CalendarOverview group="G2008"/>
             </Route>
-
         </>
     );
 

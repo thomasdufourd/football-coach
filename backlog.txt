@@ -1,3 +1,5 @@
+# Route
+ * add group (G2008) to path for: calendar, players and staff
 # API
  * Calendar events
  * Players list
