@@ -1,4 +1,4 @@
-import React, {FunctionComponent} from 'react';
+import React, {FunctionComponent, useContext} from 'react';
 import {BrowserRouter, Route} from 'react-router-dom';
 import {BASE_PATH} from './constants';
 
@@ -15,6 +15,13 @@ import WorkInProgressPage from "./WorkInProgressPage";
 import CalendarOverview from "./calendar/CalendarOverview";
 import Playerslist from "./groupadmin/Playerslist";
 
+import {
+    playerslistContext,
+    PlayerslistProvider,
+} from './api/playerslistContext';
+import {RestPlayerslist} from "./api/playerslist";
+import {useGroupId} from "./api/orgnr-hook";
+
 export const PATH_FRONTPAGE = '/';
 export const TEMP_PATH_WORK_IN_PROGRESS = '/wip';
 export const PATH_TRAINING = '/training';
@@ -28,51 +35,66 @@ export const PATH_CALENDAR = '/calendar';
 const App: FunctionComponent = () => {
     return (
         <BrowserRouter basename={BASE_PATH}>
-            <AppContent/>
+            <PlayerslistProvider>
+                <AppContent/>
+            </PlayerslistProvider>
         </BrowserRouter>
     );
 };
 
 const AppContent: FunctionComponent = () => {
 
+    const groupId = useGroupId();
+    const restPlayerslist = useContext<RestPlayerslist>(
+        playerslistContext
+    );
+
     let innhold = (
         <>
-            <Route path={PATH_FRONTPAGE} exact={true}>
-                <HomePage/>
-            </Route>
-            <Route path={TEMP_PATH_WORK_IN_PROGRESS} exact={true}>
-                <WorkInProgressPage/>
-            </Route>
-            <Route path={PATH_TRAINING} exact={true}>
-                <TrainingSessionsBoard group="G2008"/>
-            </Route>
-            <Route path={PATH_TEAMS} exact={true}>
-                <TeamsOverview group="G2008"/>
-            </Route>
-            <Route path={PATH_SPESIFIC_TEAM} exact={true}>
-                <TeamsBoard group="G2008"/>
-            </Route>
-            <Route path={PATH_LINEUPS} exact={true}>
-                <SubstitutionProvider>
-                    <LineupBoard group="G2008"/>
-                </SubstitutionProvider>
-            </Route>
-            <Route path={PATH_COMPETITTION} exact={true}>
-                <CompetitionHomePage group="G2008"/>
-            </Route>
-
-            <Route path={'/players'} exact={true}>
-                <Playerslist group="G2008"/>
-            </Route>
-            <Route path={'/staff'} exact={true}>
-                <WorkInProgressPage/>
-            </Route>
-            <Route path={PATH_CALENDAR} exact={true}>
-                <CalendarOverview group="G2008"/>
-            </Route>
+            <p> Your are not authorized to this group</p>
         </>
     );
 
+    if (groupId !== undefined) {
+
+        innhold = (
+            <>
+                <Route path={PATH_FRONTPAGE} exact={true}>
+                    <HomePage/>
+                </Route>
+                <Route path={TEMP_PATH_WORK_IN_PROGRESS} exact={true}>
+                    <WorkInProgressPage/>
+                </Route>
+                <Route path={PATH_TRAINING} exact={true}>
+                    <TrainingSessionsBoard group="G2008"/>
+                </Route>
+                <Route path={PATH_TEAMS} exact={true}>
+                    <TeamsOverview group="G2008"/>
+                </Route>
+                <Route path={PATH_SPESIFIC_TEAM} exact={true}>
+                    <TeamsBoard group="G2008"/>
+                </Route>
+                <Route path={PATH_LINEUPS} exact={true}>
+                    <SubstitutionProvider>
+                        <LineupBoard group="G2008"/>
+                    </SubstitutionProvider>
+                </Route>
+                <Route path={PATH_COMPETITTION} exact={true}>
+                    <CompetitionHomePage group="G2008"/>
+                </Route>
+
+                <Route path={'/players'} exact={true}>
+                    <Playerslist groupId={groupId} restPlayersList={restPlayerslist}/>
+                </Route>
+                <Route path={'/staff'} exact={true}>
+                    <WorkInProgressPage/>
+                </Route>
+                <Route path={PATH_CALENDAR} exact={true}>
+                    <CalendarOverview group="G2008"/>
+                </Route>
+            </>
+        );
+    }
 
     return (
         <>

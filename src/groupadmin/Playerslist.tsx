@@ -1,30 +1,29 @@
 import * as React from "react";
-import {Col, Container, Row, Table, Image} from "react-bootstrap";
+import {useEffect, useState} from "react";
+import {Col, Container, Image, Row, Table} from "react-bootstrap";
 import lineup9er from "./lineup-9er.png";
+import {Player, RestPlayerslist} from "../api/playerslist";
+import {RestStatus} from "../api/api-utils";
 
 interface Props {
-    group: string;
+    groupId: string;
+    restPlayersList: RestPlayerslist
 }
 
-const players = [
-    {
-        name: "Tobias",
-        position: "GK",
-        started: 2013
-    },
-    {
-        name: "Theo",
-        position: "MF",
-        started: 2013
-    },
-    {
-        name: "Storm",
-        position: "CB",
-        started: 2014
-    },
-];
+
+const initPlayerslist : Player[] = [];
 // TODO: make team board a SVG component that will scale instead of image
-const Playerslist: React.FunctionComponent<Props> = (props) => {
+const Playerslist: React.FunctionComponent<Props> = ({restPlayersList, groupId}) => {
+
+    const [playerslist, setPlayerslist] = useState(initPlayerslist);
+
+    useEffect(() => {
+            if (restPlayersList.status === RestStatus.Success) {
+                console.log("Setting playerslist");
+                setPlayerslist(restPlayersList.data);
+            }
+        },
+        [restPlayersList]);
 
     return (
         <Container>
@@ -42,7 +41,7 @@ const Playerslist: React.FunctionComponent<Props> = (props) => {
                         </tr>
                         </thead>
                         <tbody>
-                        {players.map( player => {
+                        {playerslist.map( player => {
                             return (
                                     <tr>
                                         <td>{player.name}</td>
@@ -54,9 +53,11 @@ const Playerslist: React.FunctionComponent<Props> = (props) => {
                        </tbody>
                     </Table>
                 </Col>
-                <Col sm="1" lg="2">
-                    <Image src={lineup9er} />
-                </Col>
+                <Row>
+                    <Col sm="1" lg="2">
+                        <Image src={lineup9er} />
+                    </Col>
+                </Row>
 
             </Row>
         </Container>

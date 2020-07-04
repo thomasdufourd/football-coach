@@ -1,13 +1,13 @@
 //const CracoLessPlugin = require('craco-less');
 const proxy = require('http-proxy-middleware');
-const apiProxyPath = '/assistantcoach/api';
+const apiProxyPath = '/football-coach/api';
 
 module.exports = {
     devServer: {
         before: app => {
             app.use(
                 proxy(apiProxyPath, {
-                    target: 'http://localhost:8080/assistantcoach/api',
+                    target: 'http://localhost:3001/api',
                     changeOrigin: true,
                     pathRewrite: (path, req) => path.replace(apiProxyPath, ''),
                 })
