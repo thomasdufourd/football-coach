@@ -217,7 +217,7 @@ const TeamsBoard: React.FunctionComponent<Props> = (props) => {
                                                             >
                                                                 {candidatePlayer.playerName}
                                                                 <div>
-                                                                    <BsXCircleFill                                                                     onClick={() => {
+                                                                    <BsXCircleFill onClick={() => {
                                                                         console.log(`playerId=${candidatePlayer.id}, 
                                                                         playerName=${candidatePlayer.playerName}`);
                                                                         const newState: CandidateTeam[] = [...teams];

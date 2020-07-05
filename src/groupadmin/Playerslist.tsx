@@ -3,30 +3,56 @@ import {useEffect, useState} from "react";
 import {Button, Col, Container, Modal, Row, Table} from "react-bootstrap";
 import {Player, RestPlayerslist} from "../api/playerslist";
 import {RestStatus} from "../api/api-utils";
+import {fetchRestPlayerslist, updatePlayer} from "../api/api";
 
 interface Props {
     groupId: string;
     restPlayersList: RestPlayerslist
 }
 
+enum RefreshListState {
+  NOT_INITIALIZED,
+  STEP_OVER,
+  REFRESH
+}
 
 const initPlayerslist: Player[] = [];
 // TODO: make team board a SVG component that will scale instead of image
 const Playerslist: React.FunctionComponent<Props> = ({restPlayersList, groupId}) => {
 
+    const [refreshListState, setRefreshListState] = useState(RefreshListState.NOT_INITIALIZED);
     const [playerslist, setPlayerslist] = useState(initPlayerslist);
+    const [updatedPlayerslist, setUpdatedPlayerslist] = useState(initPlayerslist);
+
 
     useEffect(() => {
-            if (restPlayersList.status === RestStatus.Success) {
-                console.log("Setting playerslist");
+        console.log("Calling useeffect", restPlayersList.status);
+            if (restPlayersList.status === RestStatus.Success && refreshListState === RefreshListState.NOT_INITIALIZED) {
                 setPlayerslist(restPlayersList.data);
+            } else if (refreshListState === RefreshListState.REFRESH){
+                setPlayerslist(updatedPlayerslist);
+                setRefreshListState(RefreshListState.STEP_OVER);
             }
         },
-        [restPlayersList]);
+        [restPlayersList, refreshListState]);
 
     const [showUpdatePlayerModal, setShowUpdatePlayerModal] = useState(false);
     const handleCloseUpdatePlayerModal = () => setShowUpdatePlayerModal(false);
-    const [selectedPlayer, setSelectedPlayer] = useState({name: '', started: '', position: ''});
+
+    const [selectedPlayer, setSelectedPlayer] = useState({id: '', name: '', started: '', position: ''});
+    const [nameOfSelectedPlayer, setNameOfSelectedPlayer] = useState('');
+
+    function updatePlayerslistOnServerAndRefreshList(playerslist: Player[], selectedPlayer: Player): Player[] {
+        console.log("Updating players list on the server");
+        updatePlayer('G2008', selectedPlayer);
+        const updatedlist = playerslist.map( player => {
+            return player.id === selectedPlayer.id ? selectedPlayer : player;
+        });
+        console.log(playerslist);
+        console.log(updatedlist);
+
+        return updatedlist;
+    }
 
     return (
         <Container>
@@ -38,15 +64,35 @@ const Playerslist: React.FunctionComponent<Props> = ({restPlayersList, groupId})
                     <Modal.Title>Update player</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>Name: {selectedPlayer.name}</p>
+                    <label htmlFor="name">Name: </label>
+
+                    <input
+                        onChange={
+                            (event) => setSelectedPlayer(
+                                {...selectedPlayer, name: event.target.value}
+                                )
+                        }
+                        onClick={() => {}}
+                        value={selectedPlayer.name}
+                        maxLength={20}
+                        type="text"
+                        placeholder={ ' ' }
+                        step={''}
+                    />
                     <p>Started: {selectedPlayer.started}</p>
                     <p>Position: {selectedPlayer.position}</p>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" >
+                    <Button variant="secondary" onClick={ () => {
+                        setShowUpdatePlayerModal(false);
+                    }}>
                         Discard
                     </Button>
-                    <Button variant="primary">
+                    <Button variant="primary" onClick={ () => {
+                        setUpdatedPlayerslist(updatePlayerslistOnServerAndRefreshList(playerslist, selectedPlayer));
+                        setRefreshListState(RefreshListState.REFRESH);
+                        setShowUpdatePlayerModal(false);
+                    }}>
                         Save Changes
                     </Button>
                 </Modal.Footer>
@@ -65,9 +111,11 @@ const Playerslist: React.FunctionComponent<Props> = ({restPlayersList, groupId})
                         <tbody>
                         {playerslist.map(player => {
                             return (
-                                <tr onClick={() => {
+                                <tr key={player.id}
+                                    onClick={() => {
                                     setShowUpdatePlayerModal(true);
                                     setSelectedPlayer(player);
+                                    setNameOfSelectedPlayer(player.name);
                                 }}>
                                     <td>{player.name}</td>
                                     <td>{player.started}</td>
