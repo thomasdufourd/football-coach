@@ -5,7 +5,7 @@ import footballFieldSvg from "./football-list-and-field-outline.svg";
 import trophySvg from "./football-trophy-cup.svg";
 import {Link, useLocation} from "react-router-dom";
 
-const HomePage: React.FunctionComponent = () => {
+const About: React.FunctionComponent = () => {
     const location = useLocation();
 
     return (
@@ -118,4 +118,4 @@ const HomePage: React.FunctionComponent = () => {
     );
 };
 
-export default HomePage;
+export default About;

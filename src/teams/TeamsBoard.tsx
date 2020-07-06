@@ -119,7 +119,7 @@ const TeamsBoard: React.FunctionComponent<Props> = (props) => {
     return (
         <Container>
             <Breadcrumb>
-                <Breadcrumb.Item href="/home">Home</Breadcrumb.Item>
+                <Breadcrumb.Item href="/about">Home</Breadcrumb.Item>
                 <Breadcrumb.Item active>Teams</Breadcrumb.Item>
             </Breadcrumb>
 

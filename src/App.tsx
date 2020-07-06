@@ -7,7 +7,8 @@ import Banner from "./navigation/Banner";
 import TeamsBoard from "./teams/TeamsBoard";
 import LineupBoard from './lineup/LineupBoard';
 import {SubstitutionProvider} from "./substitution/SubstitutionProvider";
-import HomePage from "./home/HomePage";
+import About from "./about/About";
+import HomePage from "./homepage/HomePage";
 import TeamsOverview from "./teams/TeamsOverview";
 import CompetitionHomePage from "./competition/CompetitionHomePage";
 import TrainingSessionsBoard from "./training/TrainingSessionsBoard";
@@ -28,8 +29,11 @@ export const PATH_TRAINING = '/training';
 export const PATH_TEAMS = '/teams';
 export const PATH_LINEUPS = '/lineups';
 export const PATH_SPESIFIC_TEAM = '/teams/thisisalongid';
-export const PATH_COMPETITTION = '/competitions';
+export const PATH_OTHER_COMPETITTIONS = '/othercompetitions';
+export const PATH_REGULAR_SEASON = '/regularseason';
 export const PATH_CALENDAR = '/calendar';
+export const PATH_ABOUT = '/about';
+export const PATH_CONTACT = '/contact';
 
 
 const App: FunctionComponent = () => {
@@ -79,8 +83,11 @@ const AppContent: FunctionComponent = () => {
                         <LineupBoard group="G2008"/>
                     </SubstitutionProvider>
                 </Route>
-                <Route path={PATH_COMPETITTION} exact={true}>
+                <Route path={PATH_REGULAR_SEASON} exact={true}>
                     <CompetitionHomePage group="G2008"/>
+                </Route>
+                <Route path={PATH_OTHER_COMPETITTIONS} exact={true}>
+                    <WorkInProgressPage/>
                 </Route>
 
                 <Route path={'/players'} exact={true}>
@@ -92,6 +99,12 @@ const AppContent: FunctionComponent = () => {
                 <Route path={PATH_CALENDAR} exact={true}>
                     <CalendarOverview group="G2008"/>
                 </Route>
+                <Route path={PATH_ABOUT} exact={true}>
+                    <About/>
+                </Route>
+                <Route path={PATH_CONTACT} exact={true}>
+                    <WorkInProgressPage/>
+                </Route>
             </>
         );
     }
@@ -99,7 +112,7 @@ const AppContent: FunctionComponent = () => {
     return (
         <>
             <Banner
-                title="Assistant Coach"
+                title="Football Coach"
                 isAdmin={false}
             />
             {innhold}

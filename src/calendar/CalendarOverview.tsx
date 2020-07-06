@@ -79,6 +79,7 @@ const CalendarOverview: React.FunctionComponent<Props> = (props) => {
                 <Col className="noPadding">
                     <div style={{ height: '500pt'}}>
                         <Calendar
+                            className="d-inline"
                             localizer={localizer}
                             events={myEventsList}
                             defaultDate={moment().toDate()}
