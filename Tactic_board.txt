@@ -1,11 +1,5 @@
 Tactic board 
 
-Ref https://youtu.be/jVE3Sqatdlg?t=50 
-https://fotballhue.no/9er-taktikk-spille-3-2-3/ 
-https://fotballhue.no/9er-taktikk/ (4-3-1)
-https://www.fotballtreneren.no/fagartikler-gras/fotballaktivitet/hvordan-velge-struktur-og-formasjoner-i-barne-og-ungdomsfotballen-2 (4-3-1)
-https://www.bundesliga.com/en/bundesliga/news/soccer-positions-explained-names-numbers-what-they-do-2579-786
-
 GK - Goalkeeper
 DF - Defenders:
     RB - Right-back
