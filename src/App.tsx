@@ -10,7 +10,6 @@ import {SubstitutionProvider} from "./substitution/SubstitutionProvider";
 import About from "./about/About";
 import HomePage from "./homepage/HomePage";
 import TeamsOverview from "./teams/TeamsOverview";
-import CompetitionHomePage from "./competition/CompetitionHomePage";
 import TrainingSessionsBoard from "./training/TrainingSessionsBoard";
 import WorkInProgressPage from "./WorkInProgressPage";
 import CalendarOverview from "./calendar/CalendarOverview";
@@ -22,6 +21,7 @@ import {
 } from './api/playerslistContext';
 import {RestPlayerslist} from "./api/playerslist";
 import {useGroupId} from "./api/orgnr-hook";
+import RegularSeason from "./regularseason/RegularSeason";
 
 export const PATH_FRONTPAGE = '/';
 export const TEMP_PATH_WORK_IN_PROGRESS = '/wip';
@@ -62,7 +62,7 @@ const AppContent: FunctionComponent = () => {
     if (groupId !== undefined) {
 
         innhold = (
-            <>
+            <div>
                 <Route path={PATH_FRONTPAGE} exact={true}>
                     <HomePage/>
                 </Route>
@@ -84,7 +84,7 @@ const AppContent: FunctionComponent = () => {
                     </SubstitutionProvider>
                 </Route>
                 <Route path={PATH_REGULAR_SEASON} exact={true}>
-                    <CompetitionHomePage group="G2008"/>
+                    <RegularSeason/>
                 </Route>
                 <Route path={PATH_OTHER_COMPETITTIONS} exact={true}>
                     <WorkInProgressPage/>
@@ -105,7 +105,7 @@ const AppContent: FunctionComponent = () => {
                 <Route path={PATH_CONTACT} exact={true}>
                     <WorkInProgressPage/>
                 </Route>
-            </>
+            </div>
         );
     }
 
