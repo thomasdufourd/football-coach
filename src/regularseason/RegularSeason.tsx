@@ -1,4 +1,5 @@
 import * as React from "react";
+import {useEffect, useState} from "react";
 import {Badge, Card, Col, Container, Form, Row, Table} from "react-bootstrap";
 import {
     teamsForRegularSeasonG2008,
@@ -44,6 +45,29 @@ const RegularSeason: React.FunctionComponent = () => {
         background: 'lightblue',
         border: '1.25px solid '
     };
+
+    // TODO:
+    //       #0 fetch teams/fixtures (with IDs)
+    //       #1 toggle on/off
+    //       #2 filter on toggle
+    //       #3 sort the fixtures by date / time (Moment?)
+
+    const [selectedTeamsForTable, setSelectedTeamsForTable] = useState([true, true, true]);
+    const [indexCheckedBoxSelected, setIndexCheckedBoxSelected] = useState();
+    const [isCheckedBoxChanged, setIsCheckedBoxChanged] = useState(false);
+
+    function filterOnTeam(indexCheckedBoxSelected: any) {
+
+    }
+
+    useEffect(() => {
+            const arrayCpy = selectedTeamsForTable.map((value, index) => {
+                return index === indexCheckedBoxSelected ? !value : value;
+            });
+            setSelectedTeamsForTable(arrayCpy);
+            filterOnTeam(indexCheckedBoxSelected);
+        },
+        [indexCheckedBoxSelected, isCheckedBoxChanged]);
 
     return (
         <Container className="mt-3">
@@ -97,10 +121,15 @@ const RegularSeason: React.FunctionComponent = () => {
                 <Form className="pl-4">
                     {teamsForRegularSeasonG2008.map((team, idx) => (
                         <Form.Check
+                            key={idx}
                             inline
                             id={`team-${idx}`}
                             label={`Team ${team.rank}`}
-                            checked={true}
+                            checked={selectedTeamsForTable[idx]}
+                            onChange={() => {
+                                setIndexCheckedBoxSelected(idx);
+                                setIsCheckedBoxChanged(!isCheckedBoxChanged);
+                            }}
                         />
                     ))}
                 </Form>            </Row>
@@ -137,10 +166,16 @@ const RegularSeason: React.FunctionComponent = () => {
                 <Form className="pl-4">
                     {teamsForRegularSeasonG2008.map((team, idx) => (
                         <Form.Check
+                            key={idx}
                             inline
                             id={`team-${idx}`}
                             label={`Team ${team.rank}`}
-                            checked={true}
+                            checked={selectedTeamsForTable[idx]}
+                            onChange={() => {
+                                setIndexCheckedBoxSelected(idx);
+                                setIsCheckedBoxChanged(!isCheckedBoxChanged);
+                            }}
+
                         />
                     ))}
                 </Form>            </Row>

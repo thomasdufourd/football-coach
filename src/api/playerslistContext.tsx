@@ -1,7 +1,7 @@
 import React, { createContext, FunctionComponent, useEffect, useState } from 'react';
 import { RestPlayerslist } from './playerslist';
 import { RestStatus } from './api-utils';
-import { useGroupId } from './orgnr-hook';
+import { useGroupId } from './groupid-hook';
 import { fetchRestPlayerslist } from './api';
 
 export const playerslistContext = createContext<RestPlayerslist>({

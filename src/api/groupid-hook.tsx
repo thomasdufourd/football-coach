@@ -5,7 +5,7 @@ export const useGroupId = (): string | undefined => {
     const groupId = new URLSearchParams(location.search).get('groupId');
 
     if (groupId === null) {
-        return 'G2008'; // TODO: enable groupId w/ autentication
+        return 'G2008'; // TODO: enable groupId w/ authentication
     } else {
         return groupId;
     }

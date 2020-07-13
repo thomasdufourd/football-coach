@@ -20,8 +20,10 @@ import {
     PlayerslistProvider,
 } from './api/playerslistContext';
 import {RestPlayerslist} from "./api/playerslist";
-import {useGroupId} from "./api/orgnr-hook";
+import {useGroupId} from "./api/groupid-hook";
 import RegularSeason from "./regularseason/RegularSeason";
+import {FixtureslistProvider} from "./api/fixtureslistContext";
+import {TeamslistProvider} from "./api/teamslistContext";
 
 export const PATH_FRONTPAGE = '/';
 export const TEMP_PATH_WORK_IN_PROGRESS = '/wip';
@@ -39,9 +41,13 @@ export const PATH_CONTACT = '/contact';
 const App: FunctionComponent = () => {
     return (
         <BrowserRouter basename={BASE_PATH}>
-            <PlayerslistProvider>
-                <AppContent/>
-            </PlayerslistProvider>
+            <TeamslistProvider>
+                <FixtureslistProvider>
+                    <PlayerslistProvider>
+                        <AppContent/>
+                    </PlayerslistProvider>
+                </FixtureslistProvider>
+            </TeamslistProvider>
         </BrowserRouter>
     );
 };
