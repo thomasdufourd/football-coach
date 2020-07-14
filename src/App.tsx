@@ -22,9 +22,10 @@ import {
 import {RestPlayerslist} from "./api/playerslist";
 import {useGroupId} from "./api/groupid-hook";
 import RegularSeason from "./regularseason/RegularSeason";
-import {FixtureslistProvider} from "./api/fixtureslistContext";
+import {fixtureslistContext, FixtureslistProvider} from "./api/fixtureslistContext";
 import {teamslistContext, TeamslistProvider} from "./api/teamslistContext";
 import {RestTeamslist} from "./api/teamslist";
+import {RestFixtureslist} from "./api/fixtureslist";
 
 export const PATH_FRONTPAGE = '/';
 export const TEMP_PATH_WORK_IN_PROGRESS = '/wip';
@@ -64,6 +65,10 @@ const AppContent: FunctionComponent = () => {
         teamslistContext
     );
 
+    const restFixtureslist = useContext<RestFixtureslist>(
+        fixtureslistContext
+    );
+
     let innhold = (
         <>
             <p> Your are not authorized to this group</p>
@@ -95,7 +100,7 @@ const AppContent: FunctionComponent = () => {
                     </SubstitutionProvider>
                 </Route>
                 <Route path={PATH_REGULAR_SEASON} exact={true}>
-                    <RegularSeason groupId={groupId} restTeamsList={restTeamslist}/>
+                    <RegularSeason groupId={groupId} restTeamsList={restTeamslist} restFixturesList={restFixtureslist}/>
                 </Route>
                 <Route path={PATH_OTHER_COMPETITTIONS} exact={true}>
                     <WorkInProgressPage/>

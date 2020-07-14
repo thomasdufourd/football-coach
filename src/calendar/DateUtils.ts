@@ -31,3 +31,11 @@ export const dateNice = (date: Date): string => {
     return `${days[date.getDay()]} ${date.getDate()} ${months[date.getMonth()]}
      - ${numberNice(date.getHours())}:${numberNice(date.getMinutes())}`;
 };
+
+export const dayOfWeekMonthYearDate = (date: Date): string => {
+    return `${days[date.getDay()]} ${date.getDate()} ${months[date.getMonth()]}`;
+};
+
+export const timeOfDate = (date: Date): string => {
+    return `${numberNice(date.getHours())}:${numberNice(date.getMinutes())}`;
+};

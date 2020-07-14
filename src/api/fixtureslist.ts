@@ -1,10 +1,11 @@
 import { RestResource } from './api-utils';
 
 export interface Fixture {
-    date: string;
-    time: string;
     home: string;
     away: string;
+    date: string;
+    arena: string;
+    surface: string;
     location: string;
 }
 

@@ -1,42 +1,28 @@
 import * as React from "react";
 import {useEffect, useState} from "react";
 import {Badge, Card, Col, Container, Form, Row, Table} from "react-bootstrap";
-import {
-    upcomingFixturesForRegularSeasonG2008_LTG12_1,
-    upcomingFixturesForRegularSeasonG2008_LTG12_3
-} from "./RegularSeasonMockData";
 import {RestTeamslist, Team} from "../api/teamslist";
 import {RestStatus} from "../api/api-utils";
+import {Fixture, RestFixtureslist} from "../api/fixtureslist";
+import {dayOfWeekMonthYearDate, timeOfDate} from "../calendar/DateUtils";
 
 interface Props {
     groupId: string;
-    restTeamsList: RestTeamslist
+    restTeamsList: RestTeamslist,
+    restFixturesList: RestFixtureslist
 }
 
-export interface Fixture {
-    date: string;
-    time: string;
-    home: string;
-    away: string;
-    location: string;
-}
-
-
-const upcomingFixturesForRegularSeasonG2008 = [
-        ...upcomingFixturesForRegularSeasonG2008_LTG12_1,
-    ...upcomingFixturesForRegularSeasonG2008_LTG12_3
-];
 
 const passedFixturesForRegularSeasonG2008: Fixture[] = [
     {
-        date: 'Fr 13.06.2020',
-        time: '13.00',
+        date: '2020-08-27T17:10:00.000Z',
+        location: '', surface: '',
         home: 'Bislett 2008',
         away: 'Lille Tøyen 3',
-        location: 'Sophus Bygge'
+        arena: 'Sophus Bygge'
     }];
 
-const RegularSeason: React.FunctionComponent<Props> = ({groupId, restTeamsList}: Props) => {
+const RegularSeason: React.FunctionComponent<Props> = ({groupId, restTeamsList, restFixturesList}: Props) => {
     const cardStyle = {
         width: '16rem',
         background: 'lightblue',
@@ -44,39 +30,65 @@ const RegularSeason: React.FunctionComponent<Props> = ({groupId, restTeamsList}:
     };
 
     const initTeamslist: Team[] = [];
-
-    // TODO:
-    //       #0 fetch teams/fixtures (with IDs)
-    //       #1 toggle on/off
-    //       #2 filter on toggle
-    //       #3 sort the fixtures by date / time (Moment?)
+    const initFixtureslist: Fixture[] = [];
 
     const [teamslist, setTeamslist] = useState(initTeamslist);
+    const [fixtureslist, setFixtureslist] = useState(initFixtureslist);
 
     const [selectedTeamsForTable, setSelectedTeamsForTable] = useState([true, true, true, true]);
-    const [indexCheckedBoxSelected, setIndexCheckedBoxSelected] = useState();
     const [isCheckedBoxChanged, setIsCheckedBoxChanged] = useState(false);
 
-    function filterOnTeam(indexCheckedBoxSelected: any) {
 
-    }
+    const sortOnDate =  (fixtures: Fixture[]):Fixture[] => {
+        return fixtures.sort((a, b) =>
+            (a.date > b.date) ? 1 : (a.date === b.date) ? ((a.location > b.location) ? 1 : -1) : -1
+        );
+    };
+
+    const applySelection =  (selectedTeams: boolean[], fixtures: Fixture[]):Fixture[] => {
+        const lt1IsSelected = selectedTeams[0];
+        const lt2IsSelected = selectedTeams[1];
+        const lt3IsSelected = selectedTeams[2];
+        const lt4IsSelected = selectedTeams[3];
+
+        console.log(`LT1? ${lt1IsSelected}, LT2? ${lt2IsSelected}, LT3? ${lt3IsSelected}, LT4? ${lt4IsSelected}`);
+
+        let selectedTeamsName: string[] = [];
+        if (lt1IsSelected) {
+            selectedTeamsName.push('Lille Tøyen 1');
+        }
+        if (lt2IsSelected) {
+            selectedTeamsName.push('Lille Tøyen 2');
+        }
+        if (lt3IsSelected) {
+            selectedTeamsName.push('Lille Tøyen 3');
+        }
+        if (lt4IsSelected) {
+            selectedTeamsName.push('Lille Tøyen 4');
+        }
+
+        return fixtures.filter( (fixture: Fixture)  =>
+            (selectedTeamsName.includes(fixture.away) || selectedTeamsName.includes(fixture.home))
+        );
+    };
 
     useEffect(() => {
-            console.log("Calling useeffect", restTeamsList.status);
+        console.log("Reload fixtureslist");
+        console.log("selectedTeamsForTable (from useEffect): ", selectedTeamsForTable);
+
+            if (restFixturesList.status === RestStatus.Success) {
+                setFixtureslist(applySelection(selectedTeamsForTable, sortOnDate(restFixturesList.data)));
+            }
+        },
+        [restFixturesList, isCheckedBoxChanged, selectedTeamsForTable]);
+
+    useEffect(() => {
             if (restTeamsList.status === RestStatus.Success) {
                 setTeamslist(restTeamsList.data);
             }
         },
         [restTeamsList]);
 
-    useEffect(() => {
-            const arrayCpy = selectedTeamsForTable.map((value, index) => {
-                return index === indexCheckedBoxSelected ? !value : value;
-            });
-            setSelectedTeamsForTable(arrayCpy);
-            filterOnTeam(indexCheckedBoxSelected);
-        },
-        [indexCheckedBoxSelected, isCheckedBoxChanged]);
 
     return (
         <Container className="mt-3">
@@ -121,7 +133,7 @@ const RegularSeason: React.FunctionComponent<Props> = ({groupId, restTeamsList}:
             </Row>
 
             <Row className="mt-2">
-                <h2>Upcomming matches</h2>
+                <h2>Upcomming fixtures</h2>
             </Row>
             <Row>
                 <Form className="pl-4">
@@ -133,7 +145,9 @@ const RegularSeason: React.FunctionComponent<Props> = ({groupId, restTeamsList}:
                             label={`${team.name}`}
                             checked={selectedTeamsForTable[idx]}
                             onChange={() => {
-                                setIndexCheckedBoxSelected(idx);
+                                setSelectedTeamsForTable(selectedTeamsForTable.map((value, index) => {
+                                    return index === idx ? !value : value;
+                                }));
                                 setIsCheckedBoxChanged(!isCheckedBoxChanged);
                             }}
                         />
@@ -145,18 +159,20 @@ const RegularSeason: React.FunctionComponent<Props> = ({groupId, restTeamsList}:
                         <thead>
                         <tr>
                             <th>Date</th>
+                            <th>Time</th>
                             <th>Match</th>
                             <th>Location</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {upcomingFixturesForRegularSeasonG2008.map((fixture, idx) => {
+                        {fixtureslist.map((fixture, idx) => {
                             return (
                                 <tr key={idx}
                                     onClick={() => {}}>
-                                    <td>{fixture.date} {fixture.time}</td>
+                                    <td>{dayOfWeekMonthYearDate(new Date(fixture.date))}</td>
+                                    <td>{timeOfDate(new Date(fixture.date))}</td>
                                     <td>{fixture.home} - {fixture.away}</td>
-                                    <td>{fixture.location}</td>
+                                    <td>{fixture.arena}</td>
                                 </tr>
                             )
                         })}
@@ -166,7 +182,7 @@ const RegularSeason: React.FunctionComponent<Props> = ({groupId, restTeamsList}:
             </Row>
 
             <Row className="mt-2">
-                <h2>Passed matches</h2>
+                <h2>Passed fixtures</h2>
             </Row>
             <Row>
                 <Col lg="8">
@@ -174,6 +190,7 @@ const RegularSeason: React.FunctionComponent<Props> = ({groupId, restTeamsList}:
                         <thead>
                         <tr>
                             <th>Date</th>
+                            <th>Time</th>
                             <th>Match</th>
                             <th>Location</th>
                         </tr>
@@ -183,9 +200,10 @@ const RegularSeason: React.FunctionComponent<Props> = ({groupId, restTeamsList}:
                             return (
                                 <tr key={idx}
                                     onClick={() => {}}>
-                                    <td>{fixture.date} {fixture.time}</td>
+                                    <td>{dayOfWeekMonthYearDate(new Date(fixture.date))}</td>
+                                    <td>{timeOfDate(new Date(fixture.date))}</td>
                                     <td>{fixture.home} - {fixture.away}</td>
-                                    <td>{fixture.location}</td>
+                                    <td>{fixture.arena}</td>
                                 </tr>
                             )
                         })}

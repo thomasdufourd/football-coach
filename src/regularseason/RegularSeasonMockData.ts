@@ -4,8 +4,14 @@
 // https://www.fotball.no/fotballdata/lag/hjem/?fiksId=173306 G12-3 (7-er)
 // https://www.fotball.no/fotballdata/lag/hjem/?fiksId=189583 G12-4
 
-import {Fixture} from "./RegularSeason";
 
+export interface Fixture {
+    date: string;
+    time: string;
+    home: string;
+    away: string;
+    location: string;
+}
 
 export const upcomingFixturesForRegularSeasonG2008_LTG12_1: Fixture[] = [
     {
