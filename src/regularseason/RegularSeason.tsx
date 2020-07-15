@@ -6,6 +6,7 @@ import {RestStatus} from "../api/api-utils";
 import {Fixture, RestFixtureslist} from "../api/fixtureslist";
 import {dayOfWeekMonthYearDate, timeOfDate} from "../calendar/DateUtils";
 import RegularSeasonLineup from "./RegularSeasonLineup";
+import {teamslistContext} from "../api/teamslistContext";
 
 interface Props {
     groupId: string;
@@ -92,6 +93,16 @@ const RegularSeason: React.FunctionComponent<Props> = ({groupId, restTeamsList, 
 
     const [showRegularSeasonLineupModal, setShowRegularSeasonLineupModal] = useState(false);
     const handleCloseRegularSeasonLineupModal = () => setShowRegularSeasonLineupModal(false);
+
+    const isOneOfOurTeams = (teamName: string): boolean => {
+        let isFound = false;
+        teamslist.forEach( team => {
+            if (team.name === teamName) {
+                isFound = true;
+            }
+        });
+        return isFound;
+    };
 
     let lineupModalContent =  (
         <p>You don't have any lineup setup for this team yet.</p>
@@ -214,7 +225,8 @@ const RegularSeason: React.FunctionComponent<Props> = ({groupId, restTeamsList, 
                         <tr>
                             <th>Date</th>
                             <th>Time</th>
-                            <th>Match</th>
+                            <th>Home</th>
+                            <th>Away</th>
                             <th>Location</th>
                         </tr>
                         </thead>
@@ -225,7 +237,8 @@ const RegularSeason: React.FunctionComponent<Props> = ({groupId, restTeamsList, 
                                     onClick={() => {}}>
                                     <td>{dayOfWeekMonthYearDate(new Date(fixture.date))}</td>
                                     <td>{timeOfDate(new Date(fixture.date))}</td>
-                                    <td>{fixture.home} - {fixture.away}</td>
+                                    <td style={{color: isOneOfOurTeams(fixture.home)? 'blue': 'black'}}>{fixture.home}</td>
+                                    <td style={{color: isOneOfOurTeams(fixture.away)? 'blue': 'black'}}>{fixture.away}</td>
                                     <td>{fixture.arena}</td>
                                 </tr>
                             )
