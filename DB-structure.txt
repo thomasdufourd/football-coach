@@ -1,2 +1,38 @@
 DB structure
 ------------
+
+
+Group
+-----
+ID					Unique ID
+
+
+(G2008-players)
+Players
+-------
+ID					Unique ID
+Name				Player's short name
+started				Start date in the group
+position			Position on the field
+
+
+
+G2008-regular_season_fixtures
+-----------------------------
+ID					Unique ID
+*group_id*
+home				same as regular_season_teams.name
+away
+date
+location
+fiksID				FIKS Id
+
+
+G2008-regular_season_teams
+--------------------------
+ID					Unique ID
+name                Team's name as in fotball.no 
+fiksID				FIKS Id
+type				7er, 9er
+
+

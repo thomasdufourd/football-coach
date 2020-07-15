@@ -75,7 +75,7 @@ const getItemStyle = (isDragging: boolean, draggableStyle: any) => ({
 const getListStyle = (isDraggingOver: boolean) => ({
     background: isDraggingOver ? "lightblue" : "lightgrey",
     padding: grid,
-    width: 250
+    width: 200
 });
 
 
@@ -118,11 +118,6 @@ const TeamsBoard: React.FunctionComponent<Props> = (props) => {
     // @ts-ignore
     return (
         <Container>
-            <Breadcrumb>
-                <Breadcrumb.Item href="/about">Home</Breadcrumb.Item>
-                <Breadcrumb.Item active>Teams</Breadcrumb.Item>
-            </Breadcrumb>
-
             <Row>
                 <Col>
                     <h1>Season 2020</h1>

@@ -1,10 +1,11 @@
 import * as React from "react";
 import {useEffect, useState} from "react";
-import {Badge, Card, Col, Container, Form, Row, Table} from "react-bootstrap";
+import {Badge, Button, Card, Col, Container, Form, Modal, Row, Table} from "react-bootstrap";
 import {RestTeamslist, Team} from "../api/teamslist";
 import {RestStatus} from "../api/api-utils";
 import {Fixture, RestFixtureslist} from "../api/fixtureslist";
 import {dayOfWeekMonthYearDate, timeOfDate} from "../calendar/DateUtils";
+import RegularSeasonLineup from "./RegularSeasonLineup";
 
 interface Props {
     groupId: string;
@@ -89,12 +90,62 @@ const RegularSeason: React.FunctionComponent<Props> = ({groupId, restTeamsList, 
         },
         [restTeamsList]);
 
+    const [showRegularSeasonLineupModal, setShowRegularSeasonLineupModal] = useState(false);
+    const handleCloseRegularSeasonLineupModal = () => setShowRegularSeasonLineupModal(false);
 
+    let lineupModalContent =  (
+        <p>You don't have any lineup setup for this team yet.</p>
+    );
+
+    if (true) {
+        lineupModalContent = (
+            <RegularSeasonLineup group="G2008"/>
+        );
+    }
     return (
         <Container className="mt-3">
+            <Modal size="lg"
+                   aria-labelledby="example-modal-sizes-title-lg"
+                   show={showRegularSeasonLineupModal}
+                   onHide={handleCloseRegularSeasonLineupModal}
+                   >
+                <Modal.Header closeButton>
+                    <Modal.Title id="example-modal-sizes-title-lg">Current lineup for Lille Tøyen 1</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    {lineupModalContent}
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => {
+                        setShowRegularSeasonLineupModal(false);
+                    }}>
+                        Discard
+                    </Button>
+                    <Button href="/lineups" variant="primary" onClick={() => {
+                        setShowRegularSeasonLineupModal(false);
+                    }}>
+                        Update
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
             <Row>
                 <h1 className="align-content-center">Regular season 2020</h1>
             </Row>
+            <Row>
+                <Col>
+                    <p>Setup teams compositions for the regular season</p>
+                </Col>
+                <Col>
+                    <Button className="m-1"
+                            type="button"
+                            href="/teams"
+                    >
+                        Setup
+                    </Button>
+                </Col>
+            </Row>
+
             <Row className="mt-2">
                 <h2>Teams for G2008</h2>
             </Row>
@@ -102,7 +153,10 @@ const RegularSeason: React.FunctionComponent<Props> = ({groupId, restTeamsList, 
 
                 {teamslist.map((team, idx) => (
                     <Card
-                        onClick={ () => {console.log(`Card ${idx} is clicked`)}}
+                        onClick={ () => {
+                            console.log(`Card ${idx} is clicked`);
+                            setShowRegularSeasonLineupModal(true);
+                        }}
                         key={idx}
                         text='dark'
                         style={cardStyle}
@@ -133,7 +187,7 @@ const RegularSeason: React.FunctionComponent<Props> = ({groupId, restTeamsList, 
             </Row>
 
             <Row className="mt-2">
-                <h2>Upcomming fixtures</h2>
+                <h2>Upcoming fixtures</h2>
             </Row>
             <Row>
                 <Form className="pl-4">
