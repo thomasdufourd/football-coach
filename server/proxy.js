@@ -11,7 +11,9 @@ const BACKEND_API_PATH = '/api';
 const BACKEND_BASEURL = `${envProperties.API_GATEWAY}`;
 
 const listOfAuthorizedAPIEndpoints = [
-    new RegExp('^' + FRONTEND_API_PATH + '/players')
+    new RegExp('^' + FRONTEND_API_PATH + '/players'),
+    new RegExp('^' + FRONTEND_API_PATH + '/teams'),
+    new RegExp('^' + FRONTEND_API_PATH + '/fixtures')
 ];
 
 const proxyConfig = {
