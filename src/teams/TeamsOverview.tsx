@@ -32,7 +32,7 @@ const TeamsOverview: React.FunctionComponent<Props> = (props) => {
                     <td>
                         <Link
                             to={{
-                                pathname: "/teams/thisisalongid",
+                                pathname: "/teams/regularseason/current",
                                 search: location.search,
                             }}
                         >

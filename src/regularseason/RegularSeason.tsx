@@ -6,7 +6,6 @@ import {RestStatus} from "../api/api-utils";
 import {Fixture, RestFixtureslist} from "../api/fixtureslist";
 import {dayOfWeekMonthYearDate, timeOfDate} from "../calendar/DateUtils";
 import RegularSeasonLineup from "./RegularSeasonLineup";
-import {teamslistContext} from "../api/teamslistContext";
 
 interface Props {
     groupId: string;
@@ -38,6 +37,7 @@ const RegularSeason: React.FunctionComponent<Props> = ({groupId, restTeamsList, 
     const [fixtureslist, setFixtureslist] = useState(initFixtureslist);
 
     const [selectedTeamsForTable, setSelectedTeamsForTable] = useState([true, true, true, true]);
+    const [selectedTeamForLineup, setSelectedTeamForLineup] = useState();
     const [isCheckedBoxChanged, setIsCheckedBoxChanged] = useState(false);
 
 
@@ -104,15 +104,6 @@ const RegularSeason: React.FunctionComponent<Props> = ({groupId, restTeamsList, 
         return isFound;
     };
 
-    let lineupModalContent =  (
-        <p>You don't have any lineup setup for this team yet.</p>
-    );
-
-    if (true) {
-        lineupModalContent = (
-            <RegularSeasonLineup group="G2008"/>
-        );
-    }
     return (
         <Container className="mt-3">
             <Modal size="lg"
@@ -124,7 +115,7 @@ const RegularSeason: React.FunctionComponent<Props> = ({groupId, restTeamsList, 
                     <Modal.Title id="example-modal-sizes-title-lg">Current lineup for Lille Tøyen 1</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    {lineupModalContent}
+                    <RegularSeasonLineup group="G2008" team={selectedTeamForLineup}/>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => {
@@ -144,28 +135,19 @@ const RegularSeason: React.FunctionComponent<Props> = ({groupId, restTeamsList, 
                 <h1 className="align-content-center">Regular season 2020</h1>
             </Row>
             <Row>
-                <Col>
-                    <p>Setup teams compositions for the regular season</p>
-                </Col>
-                <Col>
-                    <Button className="m-1"
-                            type="button"
-                            href="/teams"
-                    >
-                        Setup
-                    </Button>
-                </Col>
+                <p>Here are the teams registered for the regular season for {groupId}.</p>
+                <p>Once you have <a href="/teams/regularseason/current">set up</a> your teams compositions can you go and adjust lineup for each team</p>
             </Row>
 
             <Row className="mt-2">
                 <h2>Teams for G2008</h2>
             </Row>
             <Row>
-
                 {teamslist.map((team, idx) => (
                     <Card
                         onClick={ () => {
                             console.log(`Card ${idx} is clicked`);
+                            setSelectedTeamForLineup(team);
                             setShowRegularSeasonLineupModal(true);
                         }}
                         key={idx}
@@ -260,6 +242,7 @@ const RegularSeason: React.FunctionComponent<Props> = ({groupId, restTeamsList, 
                             <th>Time</th>
                             <th>Match</th>
                             <th>Location</th>
+                            <th>Result</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -271,6 +254,7 @@ const RegularSeason: React.FunctionComponent<Props> = ({groupId, restTeamsList, 
                                     <td>{timeOfDate(new Date(fixture.date))}</td>
                                     <td>{fixture.home} - {fixture.away}</td>
                                     <td>{fixture.arena}</td>
+                                    <td>4 - 4</td>
                                 </tr>
                             )
                         })}

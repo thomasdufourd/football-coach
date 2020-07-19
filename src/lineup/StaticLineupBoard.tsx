@@ -12,43 +12,16 @@ import StaticPitchSvg from "./StaticPitchSvg";
 
 interface Props {
     group: string;
+    lineup: Lineup;
 }
 
 
-const StaticLineupBoard: React.FunctionComponent<Props> = (props) => {
+const StaticLineupBoard: React.FunctionComponent<Props> = ({group, lineup}) => {
 
-    const lineupLilleTøyen1: Lineup = {
-        team: {
-            group: {
-                name: "G2008",
-                yearOfBirth: 2008, gender: "boy", players: [] // TODO: populate with all players
-            },
-            name: "Lag #1",
-            order: 1,
-            players: [],
-            tacticalSchemaType: __9er
-        },
-        schema: __4_3_1,
-        starting: [
-            {playerName: 'Goal keeper (GK)', role: Role.GOAL_KEEPER},
-            {playerName: 'Left back (LB)', role: Role.LEFT_BACK},
-            {playerName: 'Center back (CB)', role: Role.CENTRE_BACK_LEFT},
-            {playerName: 'Center back (CB)', role: Role.CENTRE_BACK_RIGHT},
-            {playerName: 'Right back (RB)', role: Role.RIGHT_BACK},
-            {playerName: 'Left Wing (LW)', role: Role.LEFT_WING},
-            {playerName: 'Midfield (MF)', role: Role.BOX_TO_BOX_MIDFIELD},
-            {playerName: 'Right wing (RW)', role: Role.RIGHT_WING},
-            {playerName: 'Striker (ST)', role: Role.STRIKER}
-        ],
-        substitutes: [
-            'Nedim', 'Max', 'Amund SF'
-        ]
-    };
-
-    const substitutes = lineupLilleTøyen1.substitutes;
-    const startingPlayersList = lineupLilleTøyen1.starting;
-    const chosenSchema = lineupLilleTøyen1.schema;
-    const team = lineupLilleTøyen1.team;
+    const substitutes = lineup.substitutes;
+    const startingPlayersList = lineup.starting;
+    const chosenSchema = lineup.schema;
+    const team = lineup.team;
 
 
     return (

@@ -36,3 +36,22 @@ fiksID				FIKS Id
 type				7er, 9er
 
 
+G2008-regular_season_lineups
+----------------------------
+ID 					Unique ID
+team_ID				Related team's ID
+Type 				7er, 9er (?)
+Schema				4_3_1, 3_3_2
+
+G2008-regular_season_lineups_details
+------------------------------------
+ID 					Unique ID
+lineup_ID			Related lineup's ID
+playerName			Name of player (Player's ID?)
+Role 				GOAL_KEEPER, CENTRE_BACK_LEFT, ...
+
+
+
+
+
+
