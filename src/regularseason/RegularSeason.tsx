@@ -135,8 +135,8 @@ const RegularSeason: React.FunctionComponent<Props> = ({groupId, restTeamsList, 
                 <h1 className="align-content-center">Regular season 2020</h1>
             </Row>
             <Row>
-                <p>Here are the teams registered for the regular season for {groupId}.</p>
-                <p>Once you have <a href="/teams/regularseason/current">set up</a> your teams compositions can you go and adjust lineup for each team</p>
+                <p>Here are the teams that are registered for the regular season for {groupId}.</p>
+                <p>You may first <a href="/teams/regularseason/current">set up</a> your teams compositions</p>
             </Row>
 
             <Row className="mt-2">

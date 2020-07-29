@@ -2,10 +2,14 @@ import * as React from 'react';
 import StaticLineupBoard from "../lineup/StaticLineupBoard";
 import {__4_3_1, __9er, Lineup, Role} from "../domain/PlayerUtils";
 import {Team} from "../api/teamslist";
+import {useEffect} from "react";
+import {RestStatus} from "../api/api-utils";
+import {fetchRestTeamslist} from "../api/api";
 
 /*
- TODO: This component will show the lineup for a selected team (blue pitch)
-  -> choose tactical schema and starting players
+ TODO: This component will show the CURRENT lineup for a selected team (blue pitch)
+  -> fetch lineups for current team
+  -> take the CURRENT one
  */
 
 interface Props {
@@ -16,10 +20,23 @@ interface Props {
 
 const RegularSeasonLineup: React.FunctionComponent<Props> = ({group, team}) => {
 
+    /*
+    useEffect(() => {
+        if (team) {
+            setRestLineup({
+                status: RestStatus.NotLastedYet,
+            });
+            const fetchRestTeamslistAndSetState = async () => {
+                setRestLineup(await fetchRestTeamslist(team.id));
+            };
+            fetchRestTeamslistAndSetState();
+        }
+    }, [groupId]);
+
     let lineupModalContent =  (
         <p>You don't have any lineup setup for this team yet.</p>
     );
-
+*/
 
     const getLineupForTeam = (team: Team):Lineup => {
 

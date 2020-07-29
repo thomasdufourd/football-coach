@@ -16,6 +16,9 @@ const teamsListPath = (groupId: string) =>
 const fixturesListPath = (groupId: string) =>
     `${FRONTEND_API_PATH}/fixtures`; // TODO: use groupId
 
+const lineupPath = (teamId: string) =>
+    `${FRONTEND_API_PATH}/lineup`; // TODO: use teamId
+
 export const fetchRestTeamslist = async (
     groupId: string
 ): Promise<RestTeamslist> => {
@@ -99,6 +102,30 @@ export const updatePlayer = async (
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(player),
+        credentials: 'include',
+    });
+
+    console.log(response);
+    const restStatus = getRestStatus(response.status);
+    if (restStatus === RestStatus.Success) {
+        return {
+            status: RestStatus.Success,
+            data: await response.json().then((data) => {
+                console.log(data);
+                return data;
+            }),
+        };
+    }
+    return {
+        status: restStatus,
+    };
+};
+
+export const fetchRestLineup = async (
+    teamId: string
+): Promise<RestTeamslist> => {
+    const response = await fetch(lineupPath(teamId), {
+        method: 'GET',
         credentials: 'include',
     });
 

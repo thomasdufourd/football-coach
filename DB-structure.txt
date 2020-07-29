@@ -5,6 +5,8 @@ DB structure
 Group
 -----
 ID					Unique ID
+name 				
+description 		
 
 
 (G2008-players)
@@ -15,8 +17,17 @@ Name				Player's short name
 started				Start date in the group
 position			Position on the field
 
+Event
+-----
+ID					Unique ID
+name
+type 				Cup, Regular Season, Friendly
 
 
+
+How to make "FiksID" generic ???
+
+***** Temporary *****
 G2008-regular_season_fixtures
 -----------------------------
 ID					Unique ID
@@ -34,24 +45,128 @@ ID					Unique ID
 name                Team's name as in fotball.no 
 fiksID				FIKS Id
 type				7er, 9er
+***** --------- *****
 
 
-G2008-regular_season_lineups
-----------------------------
+
+=========== Teams compositions ===============
+
+G2008-regular_season_teams_compositions
+--------------------------------------
 ID 					Unique ID
+compositionName		Name
 team_ID				Related team's ID
+
+G2008-regular_season_teams_composition_details
+----------------------------------------------
+ID 						Unique ID
+teams_composition_ID 	Related team's ID
+player_ID 				Player's ID
+
+
+=================== lineups ==================
+
+G2008_lineups
+-------------
+ID 					Unique ID
+teams_ID			Related team's ID
 Type 				7er, 9er (?)
 Schema				4_3_1, 3_3_2
 
-G2008-regular_season_lineups_details
-------------------------------------
+G2008_lineup_details
+---------------------
 ID 					Unique ID
 lineup_ID			Related lineup's ID
-playerName			Name of player (Player's ID?)
-Role 				GOAL_KEEPER, CENTRE_BACK_LEFT, ...
+player_ID			Player's ID
+Role 				GOAL_KEEPER, CENTRE_BACK_LEFT, ... SUBSTITUTE
 
+---------------------------------
+API
+---
+Endpoints are protected by a login {token}. A user has only access to ONE group. 
+											------------------------------------ 
 
+-> GROUPS
+Fetch the group a user has access to
+/api/groups {token}
+[
+    {
+        "id": "reclgaB9uf0n3oyhj",
+        "ident": "G2008",
+        "name": "G2008",
+        "age": 12,
+        "description": "Gutter født 2008",
+        "players": [
+            "recdvsHtkea9zlMWE",
+            "recrmBcDSfZ6HQ1WL",
+            ...
+        ],
+        "teams": [
+            "recUd65HJkbvshpfD",
+            "recvgVvxKQfA3GSLL",
+            "rec0WmLGGvA1xuFfD"
+        ],
+        "admin_users": [
+            "rec3PABsSXZJoy5zY",
+            ...
+        ]
+    },
 
+-> COMPETITIONS
+The competitions for the group
+/api/competitions
+[
+    {
+        "id": "recx3LoFIntK5Qw9a",
+        "ident": "G2008-Seriespill-2020",
+        "name": "Seriespill",
+        "year": 2020,
+        "from": "2020-08-01",
+        "to": "2020-12-31",
+        "type": "REGULAR_SEASON",
+        "teams": [
+            "recUd65HJkbvshpfD",
+            "recvgVvxKQfA3GSLL",
+            "rec0WmLGGvA1xuFfD"
+        ],
+        "fixtures": [
+            "recaSYYArVUBNFm6o",
+            "recGhgCUGjKiOhkby",
+            "recB1aCWxKXNDTsDo",
+        ],
+        "groupId": [
+            "reclgaB9uf0n3oyhj"
+        ]
+    },
+
+-> PLAYERS
+The players list for the group 
+/api/players {token}
+
+[
+    {
+        "id": "recdvsHtkea9zlMWE",
+        "ident": "G2008-Tobias",
+        "name": "Tobias",
+        "started": "2013",
+        "groupId": [
+            "reclgaB9uf0n3oyhj"
+        ]
+    },
+    {
+        "id": "recrmBcDSfZ6HQ1WL",
+        "ident": "G2008-Theo",
+        "name": "Theo",
+        "started": "2013",
+        "groupId": [
+            "reclgaB9uf0n3oyhj"
+        ]
+    },
+]
+
+3635
+
+2444929
 
 
 
