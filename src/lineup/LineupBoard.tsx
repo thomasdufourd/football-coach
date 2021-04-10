@@ -3,7 +3,7 @@ import './LineupBoard.scss';
 import PitchSvg from "./PitchSvg";
 import {Button, Col, Container, Dropdown, Row} from "react-bootstrap";
 import {__3_3_2, __4_3_1, emptyLineup, emptyTacticalSchema, emptyTeam, Lineup, Team} from "../domain/PlayerUtils";
-import {lineupG2008Lag1, lineupG2008Lag2, lineupG2008Lag3} from "../mocking/LineupMockdata"
+import {lineupG2008LagBase, lineupG2008Lag1, lineupG2008Lag2, lineupG2008Lag3} from "../mocking/LineupMockdata"
 import {SubstitutionInfoPanel} from "../substitution/SubstitutionInfoPanel";
 import {SubstitutionContext} from "../substitution/SubstitutionProvider";
 import {emptySubstitution} from "../substitution/SubstitutionUtils";
@@ -24,7 +24,7 @@ const LineupBoard: React.FunctionComponent<Props> = (props) => {
     const {setSubstitution} = React.useContext(SubstitutionContext);
 
     const availableLineupsForTheGroup: Lineup[] = [
-        lineupG2008Lag1, lineupG2008Lag2, lineupG2008Lag3
+        lineupG2008Lag1, lineupG2008Lag2
     ];
 
     // This should be the input ---> App ?
